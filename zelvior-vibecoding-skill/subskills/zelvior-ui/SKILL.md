@@ -1,6 +1,6 @@
 ---
 name: zelvior-ui
-description: Zelvior UI knowledge set for interface styling. Routes interface design work to the right focused subskill: visual principles, color palettes, font recommendations, component patterns, or WCAG 2.2 accessibility. Use whenever the user asks to style, format, or lay out a UI, write or review CSS/HTML, pick, choose, or decide on colors, fonts, or typefaces, build, design, or make a specific component, or make something accessible, fix a11y, or check WCAG compliance — however the user words it. Part of zelvior-vibecoding-skill.
+description: Zelvior UI knowledge set for interface styling. Routes interface design work to the right focused subskill: visual principles, color palettes, font recommendations, component patterns, or WCAG 2.2 accessibility. Use whenever the user wants to style, format, lay out, arrange, structure, or organize a UI, write or review CSS/HTML, pick, choose, decide on, select, or set up colors, fonts, or typefaces, build, design, make, or put together a specific component, or make something accessible, fix a11y, check, or verify WCAG compliance — however the user words it (e.g. "how should I style this", "what color should I use", "which font", "help me build this component", "make it accessible", "is this WCAG compliant"). Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior UI

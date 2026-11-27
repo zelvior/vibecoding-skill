@@ -1,6 +1,6 @@
 ---
 name: zelvior-seo-performance
-description: Zelvior SEO and performance subskill. Use for any SEO, ranking, search, Core Web Vitals, performance, speed, Lighthouse, image, or metadata work — whenever the user asks to improve, optimize, speed up, tune, or fix SEO, ranking, performance, load time, Core Web Vitals, Lighthouse scores, images, or metadata, or wants more traffic or better search results. Part of zelvior-vibecoding-skill.
+description: Zelvior SEO and performance subskill. Use for any SEO, ranking, search, Core Web Vitals, performance, speed, load, Lighthouse, image, or metadata work — whenever the user wants to improve, optimize, speed up, speed up, tune, fix, get better, boost, raise, or clean up SEO, ranking, search results, visibility, traffic, performance, speed, load time, Core Web Vitals, Lighthouse scores, images, or metadata — or says "make it rank", "improve my SEO", "speed up the site", "make it faster", "get more traffic", "better search results", "optimize performance", "how do I improve ranking". Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior SEO and Performance Subskill

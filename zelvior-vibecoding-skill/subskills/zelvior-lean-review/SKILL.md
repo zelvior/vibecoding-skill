@@ -4,10 +4,13 @@ description: >
   Quality review of a change: is the logic right, is it safe, does it hold
   under real load, is risky code tested, is it fast enough, and is every line
   needed. Reads the connected code, not only the diff. Each finding is
-  explained in plain English. Use for "review this", "code review", "review
-  the last commit", "review my PR", "look over my code", "check this change",
-  "is this safe", "vet this", "sanity check this", "will this break", "is
-  this over-engineered", "is this too much", /zelvior-lean-review.
+  explained in plain English. Use for "review this", "review this change",
+  "code review", "review the code", "review the last commit", "review my PR",
+  "review my change", "look over my code", "look at this", "check this change",
+  "check this code", "check my work", "is this safe", "is this right", "vet
+  this", "sanity check this", "sanity check the change", "will this break",
+  "will this hold up", "is this over-engineered", "is this too much", "is this
+  good", /zelvior-lean-review.
 ---
 
 Review a change like the senior developer who will be paged when it breaks.

@@ -4,9 +4,11 @@ description: >
   Curated typeface catalog with weights, licensing, and CSS snippets for sans-serif fonts
   (Inter, Roboto, Open Sans, Proxima Nova, Graphik, Futura, Lato, IBM Plex Sans) and
   serif fonts (Merriweather, EB Garamond, Crimson Pro, Alegreya). Includes font pairing
-  tables and the system font stack. Apply whenever the user asks to pick, choose, decide, or set
-  up a font, typeface, or font-family, set up CSS font stacks, pair headline and body typefaces,
-  or decide between free and commercial fonts for a project.
+  tables and the system font stack. Apply whenever the user wants to pick, choose, decide, select,
+  figure out, or set up a font, typeface, font-family, or font pairing, set up CSS font stacks,
+  pair headline and body typefaces, choose between free and commercial fonts, or asks "what font
+  should I use", "which font", "help me pick a font", "how do I pair fonts", "what's a good
+  typeface for this".
 ---
 
 # Font Recommendations

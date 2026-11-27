@@ -1,6 +1,6 @@
 ---
 name: zelvior-design
-description: Zelvior design system subskill. Use for any UI/UX, visual design, look-and-feel, styling, component, motion, or brand work — whenever the user asks to design, style, lay out, structure, or polish a UI, set up a design system, build or review components, add motion, or define brand visuals. Covers must-have patterns and banned anti-patterns. Part of zelvior-vibecoding-skill.
+description: Zelvior design system subskill. Use for any UI/UX, visual design, look-and-feel, styling, component, motion, animation, or brand work — whenever the user wants to design, style, format, lay out, structure, arrange, organize, polish, refine, overhaul, or improve a UI, set up or build a design system, build, make, or review components, add motion or animation, or define, set up, or pick brand visuals, colors, or identity. Matches "I need a design system", "help me design the UI", "how should I style this", "can you lay out the screen", "make it look good", "design the components". Covers must-have patterns and banned anti-patterns. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior Design Subskill

@@ -2,7 +2,9 @@
 name: zelvior-lean-help
 description: >
   Quick reference for zelvior-lean levels, skills and commands. One-shot display.
-  Use for /zelvior-lean-help, "zelvior-lean help", "how do I use zelvior-lean".
+  Use for /zelvior-lean-help, "zelvior-lean help", "how do I use zelvior-lean",
+  "how does zelvior-lean work", "what are the zelvior-lean levels", "zelvior-lean
+  commands", "how do I run zelvior-lean".
 ---
 
 # Zelvior-Lean Help
