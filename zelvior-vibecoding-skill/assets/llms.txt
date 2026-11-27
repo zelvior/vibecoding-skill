@@ -1,0 +1,14 @@
+# Example Site
+
+> One-line description of what this site does and who it is for.
+
+## Key pages
+
+- [Home](https://example.com/): what the product does and the primary action.
+- [About](https://example.com/about): who built it and why.
+- [Contact](https://example.com/contact): how to reach the team.
+
+## Contact
+
+- Email: hello@example.com
+- Response time: within 2 business days.
