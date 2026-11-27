@@ -10068,17 +10068,17 @@ const LOST_CHECKS = {
 function lose(errors, name, e, msg) {
   const why = msg ?? (e && e.message) ?? String(e);
   errors.push(`${name}: ${why}`);
-  (errors.lost ||= []).push({ name, why: String(why).split('\n')[0].slice(0, 90) });
+  (errors.lost = errors.lost || []).push({ name, why: String(why).split('\n')[0].slice(0, 90) });
 }
 // what the page's own probe could not read ("spill: TypeError ..."): told by its part's name
-const takePage = (to, list, pre = '') => { for (const e of list) { const name = String(e).split(':')[0]; to.push(pre + e); (to.lost ||= []).push({ name, why: String(e).slice(name.length + 2).slice(0, 90) }); } };
-const takeErrors = (to, from) => { to.push(...from); if (from.lost) (to.lost ||= []).push(...from.lost); };
+const takePage = (to, list, pre = '') => { for (const e of list) { const name = String(e).split(':')[0]; to.push(pre + e); (to.lost = to.lost || []).push({ name, why: String(e).slice(name.length + 2).slice(0, 90) }); } };
+const takeErrors = (to, from) => { to.push(...from); if (from.lost) (to.lost = to.lost || []).push(...from.lost); };
 // the lost calls, as one WARN a check a width: "partly measured: <what>"; `have` are the findings of that width
 function lostFindings(lost, have) {
   const by = new Map();
   for (const l of lost || []) {
     const mid = String(l.name).split(' ')[0], mod = MODULES.find((m) => m.id === l.name) || MODULES.find((m) => m.id === mid);
-    const t = (Object.hasOwn(LOST_CHECKS, l.name) ? LOST_CHECKS[l.name] : null) || (mod ? [mod.checks.map((c) => c.id), `the ${l.name} block`] : ORDER.includes(l.name) ? [[l.name], `the ${l.name} probe`] : null);
+    const t = (Object.prototype.hasOwnProperty.call(LOST_CHECKS, l.name) ? LOST_CHECKS[l.name] : null) || (mod ? [mod.checks.map((c) => c.id), `the ${l.name} block`] : ORDER.includes(l.name) ? [[l.name], `the ${l.name} probe`] : null);
     if (!t) continue;
     for (const c of t[0]) { if (!by.has(c)) by.set(c, new Set()); by.get(c).add(`${t[1]} (${l.why})`); }
   }

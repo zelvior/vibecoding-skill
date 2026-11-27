@@ -105,11 +105,11 @@ async function fetchCached(url) {
 }
 let noCrop = false;
 const memo = {};
-const loadBoxes = () => (memo.boxes ||= (() => { try { return loadIndex().boxes || {}; } catch { return {}; } })());
-const iconify = async s => (memo[s] ||= JSON.parse(await fetchCached(setJson(s))));
-const logoIndex = async () => (memo.logos ||= JSON.parse(await fetchCached(logoListUrl())));
+const loadBoxes = () => (memo.boxes = memo.boxes || (() => { try { return loadIndex().boxes || {}; } catch { return {}; } })());
+const iconify = async s => (memo[s] = memo[s] || JSON.parse(await fetchCached(setJson(s))));
+const logoIndex = async () => (memo.logos = memo.logos || JSON.parse(await fetchCached(logoListUrl())));
 /* the set's own file names: logos.json lists them per brand (shortname, name, site, files) */
-const logoNames = async () => (memo.logoNames ||= (await logoIndex()).flatMap(b => b.files.map(f => ({ key: f.replace(/\.svg$/, ''), brand: b }))));
+const logoNames = async () => (memo.logoNames = memo.logoNames || (await logoIndex()).flatMap(b => b.files.map(f => ({ key: f.replace(/\.svg$/, ''), brand: b }))));
 /* a raw logo SVG reduced to what the pipeline works with: its inner markup and its drawing box */
 function rawLogo(text) {
   const t = text.replace(/<\?xml[\s\S]*?\?>|<!DOCTYPE[^>]*>|<!--[\s\S]*?-->|<metadata[\s\S]*?<\/metadata>|<title>[\s\S]*?<\/title>|<desc>[\s\S]*?<\/desc>/gi, '').trim();
@@ -122,7 +122,7 @@ function rawLogo(text) {
   const body = t.slice(root.index + root[0].length, t.lastIndexOf('</svg>')).trim();
   return { body, width: vb[2], height: vb[3], left: vb[0], top: vb[1], xlink: /xlink:/.test(body) };
 }
-const siList = async () => (memo.si ||= (j => (Array.isArray(j) ? j : j.icons))(JSON.parse(await fetchCached(siData()))));
+const siList = async () => (memo.si = memo.si || (j => (Array.isArray(j) ? j : j.icons))(JSON.parse(await fetchCached(siData()))));
 const siSlug = t => t.slug || t.title.toLowerCase().replace(/\+/g, 'plus').replace(/\./g, 'dot').replace(/&/g, 'and').normalize('NFD').replace(/[^a-z0-9]/g, '');
 const clean = s => s.replace(/[^a-z0-9._-]/gi, '');
 const loadIndex = () => JSON.parse(fs.readFileSync(INDEX, 'utf8'));

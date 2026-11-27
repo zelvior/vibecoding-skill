@@ -312,7 +312,7 @@ async function publish(a) {
   const [head, rest] = page.split('<!--assets-->');
   if (!rest || !rest.includes('<!--/assets-->')) die('publish: the template has no <!--assets--> ... <!--/assets--> block of stylesheet links');
   const [links, tail] = rest.split('<!--/assets-->');
-  page = head + '<!--assets-->' + links.replaceAll('href="../', 'href="./') + '<!--/assets-->' + tail;
+  page = head + '<!--assets-->' + links.replace(/href="\.\.\//g, 'href="./') + '<!--/assets-->' + tail;
   page = page.replace(ROOT_DEV, '<script id="paths" type="application/json">{"root": "./"}</script>')
     .replace('/*PRESETS*/', JSON.stringify(PRESETS));
   if (/(href|src)="\.\.\//.test(page)) die('publish: the page still points at ../ outside the assets block');
