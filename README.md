@@ -221,13 +221,13 @@ Five live sites and web apps, each built with the skill and deployed to GitHub P
 
 **Showcase hub:** [https://zelvior.github.io/vibecoding-skill/](https://zelvior.github.io/vibecoding-skill/)
 
-| Site | What it demonstrates | Link |
-|------|----------------------|------|
-| 🌌 **Aurora — Product Landing** | Anti-slop craft, CRO, design, pricing | [Live](https://zelvior.github.io/vibecoding-skill/showcase/aurora/) |
-| 📊 **Pulse — Analytics Dashboard** | UI styling, components, data, accessibility | [Live](https://zelvior.github.io/vibecoding-skill/showcase/pulse/) |
-| 🎨 **Muse — Design Studio** | Design system, typography, brand, a11y | [Live](https://zelvior.github.io/vibecoding-skill/showcase/muse/) |
-| ✍️ **Quill — Knowledge Blog** | SEO, content, performance, llms.txt | [Live](https://zelvior.github.io/vibecoding-skill/showcase/quill/) |
-| 🛠️ **Forge — Interactive Game** | Interactive canvas, motion, effects | [Live](https://zelvior.github.io/vibecoding-skill/showcase/forge/) |
+| Screenshot | Site | What it demonstrates | Link |
+|------------|------|----------------------|------|
+| ![Aurora](docs/showcase/screenshots/aurora.png) | 🌌 **Aurora — Product Landing** | Anti-slop craft, CRO, design, pricing | [Live](https://zelvior.github.io/vibecoding-skill/showcase/aurora/) |
+| ![Pulse](docs/showcase/screenshots/pulse.png) | 📊 **Pulse — Analytics Dashboard** | UI styling, components, data, accessibility | [Live](https://zelvior.github.io/vibecoding-skill/showcase/pulse/) |
+| ![Muse](docs/showcase/screenshots/muse.png) | 🎨 **Muse — Design Studio** | Design system, typography, brand, a11y | [Live](https://zelvior.github.io/vibecoding-skill/showcase/muse/) |
+| ![Quill](docs/showcase/screenshots/quill.png) | ✍️ **Quill — Knowledge Blog** | SEO, content, performance, llms.txt | [Live](https://zelvior.github.io/vibecoding-skill/showcase/quill/) |
+| ![Forge](docs/showcase/screenshots/forge.png) | 🛠️ **Forge — Interactive Game** | Interactive canvas, motion, effects | [Live](https://zelvior.github.io/vibecoding-skill/showcase/forge/) |
 
 Each showcase is plain static HTML/CSS/JS — no build step, no dependencies — so you can read the source and see the skill's principles applied directly. The local copies live under `docs/showcase/` in this repository.
 
