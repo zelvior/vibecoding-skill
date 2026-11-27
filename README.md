@@ -45,14 +45,19 @@ Find Zelvior Labs and support the project across the web:
 | [![Blog](https://img.shields.io/badge/Blog-zelvior-ff8c00?style=for-the-badge)](https://zelvior.blogspot.com) | [![GitHub Org](https://img.shields.io/badge/GitHub%20Org-ZelviorLabs-181717?style=for-the-badge)](https://github.com/Zelvior-Labs) |
 | [![GitHub](https://img.shields.io/badge/GitHub-zelvior-181717?style=for-the-badge)](https://github.com/zelvior) | |
 
+## Badges
+
+<!-- Add more badges below, one per line. Format: [![Name](badge-image-url)](link-url) -->
+[![RepoRanker](https://reporanker.com/badge/zelvior/vibecoding-skill)](https://reporanker.com/repos/zelvior/vibecoding-skill)
+
 ## Table of contents
 
+- [Badges](#badges)
 - [How it works](#how-it-works)
 - [What is inside](#what-is-inside)
 - [Connect with Zelvior Labs](#connect-with-zelvior-labs)
 - [Quick start](#quick-start)
 - [Legacy compatibility](#legacy-compatibility)
-- [Showcase](#showcase)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
@@ -214,22 +219,6 @@ The skill degrades gracefully on older systems instead of failing hard:
 - **Browser-dependent craft checks** — run automated checks on Node 22+ with a browser engine (**Obscura** preferred, falling back to Chrome/Edge/Chromium). On older Node or without an engine, they **never crash**: they print a MANUAL-mode message and exit code 3, and you follow the documented manual verification path.
 
 See `docs/legacy-compatibility.md` for the full breakdown and `python3 zelvior-vibecoding-skill/scripts/compat.py` for a per-machine report.
-
-## Showcase
-
-Five live sites and web apps, each built with the skill and deployed to GitHub Pages. Open any link to verify the skill's capabilities in a real browser — every site is production-style, accessible, responsive, and audit-passing.
-
-**Showcase hub:** [https://zelvior.github.io/vibecoding-skill/](https://zelvior.github.io/vibecoding-skill/)
-
-| Screenshot | Site | What it demonstrates | Link |
-|------------|------|----------------------|------|
-| ![Aurora](docs/showcase/screenshots/aurora.png) | 🌌 **Aurora — Product Landing** | Anti-slop craft, CRO, design, pricing | [Live](https://zelvior.github.io/vibecoding-skill/showcase/aurora/) |
-| ![Pulse](docs/showcase/screenshots/pulse.png) | 📊 **Pulse — Analytics Dashboard** | UI styling, components, data, accessibility | [Live](https://zelvior.github.io/vibecoding-skill/showcase/pulse/) |
-| ![Muse](docs/showcase/screenshots/muse.png) | 🎨 **Muse — Design Studio** | Design system, typography, brand, a11y | [Live](https://zelvior.github.io/vibecoding-skill/showcase/muse/) |
-| ![Quill](docs/showcase/screenshots/quill.png) | ✍️ **Quill — Knowledge Blog** | SEO, content, performance, llms.txt | [Live](https://zelvior.github.io/vibecoding-skill/showcase/quill/) |
-| ![Forge](docs/showcase/screenshots/forge.png) | 🛠️ **Forge — Interactive Game** | Interactive canvas, motion, effects | [Live](https://zelvior.github.io/vibecoding-skill/showcase/forge/) |
-
-Each showcase is plain static HTML/CSS/JS — no build step, no dependencies — so you can read the source and see the skill's principles applied directly. The local copies live under `docs/showcase/` in this repository.
 
 ## Documentation
 
