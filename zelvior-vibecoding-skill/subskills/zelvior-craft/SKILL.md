@@ -6,17 +6,21 @@ description: >-
   equal edges, real photographs and real product UI (licensed stand-in photographs when the client
   has none; a product render only when the brief asks for 3D), a hero entrance and one or two dealt
   moments on every page, shader effects and scenes only on tech, gaming and software pages, quiet
-  micro-interactions, and a checker and finish gate that enforce it in a real browser. Use this
-  whenever the user wants or asks for anything that should be a real, polished, made-for-the-client
-  web page or site — however they phrase it: I need, I want, can you, could you, help me, how do I,
-  set up, make, create, build, craft, build out, whip up, spin up, mock up, wire up, put together,
-  draft, put a page together, design, redesign, restyle, redo, rework, overhaul, refresh, polish,
-  fix up, clean up, revamp, or review a landing page, homepage, hero, company site, product page,
-  shop, store, cafe, restaurant, hotel, studio, portfolio, SaaS, AI, developer-tool, or game site —
-  as static HTML/CSS or inside an existing React, Next.js, Vue, Svelte, Astro or Tailwind project.
-  Also triggers whenever the user says a page looks generic, templated, "AI-made", cheap, crappy,
-  bland, basic, boring, ugly, or like a starter template, or asks for it to look premium, polished,
-  custom, professional, high-end, bespoke, or "not templated".
+  micro-interactions, and a checker and finish gate that enforce it in a real browser. Use this for
+  absolutely any request of any kind that involves, asks for, wants, or needs a real, polished,
+  made-for-the-client web page, site, or web thing — no matter the wording, register, or phrasing,
+  from formal to casual to slang. Matches whether the user asserts, requests, asks, commands,
+  questions, or even just mentions it: I need, I want, I'd like, I'm looking for, I need a site,
+  I want a page, can you, could you, would you, will you, please, help me, help with, how do I,
+  how to, how should I, set up, set me up, get me, get it, make, create, build, craft, build out,
+  whip up, spin up, mock up, wire up, put together, draft, put a page together, design, redesign,
+  restyle, redo, rework, overhaul, refresh, revamp, polish, fix up, clean up, or review a landing
+  page, homepage, hero, company site, product page, shop, store, cafe, restaurant, hotel, studio,
+  portfolio, SaaS, AI, developer-tool, or game site — as static HTML/CSS or inside an existing
+  React, Next.js, Vue, Svelte, Astro or Tailwind project. Also triggers whenever the user says a
+  page looks generic, templated, "AI-made", cheap, crappy, bland, basic, boring, ugly, lame, or
+  like a starter template, or asks for it to look premium, polished, custom, professional,
+  high-end, bespoke, made-for-the-client, or "not templated" — or anything even loosely like it.
 hooks:
   Stop:
     - hooks:

@@ -4,13 +4,19 @@ description: >
   WCAG 2.2 accessibility guidelines with actionable implementation rules for web developers.
   Covers contrast ratios, keyboard navigation, focus management, ARIA, screen readers, alt text,
   touch targets, form validation, color blindness, reduced motion, semantic HTML, and landmarks.
-  Apply whenever the user wants to make something accessible, fix a11y, check or
-  verify WCAG, handle screen readers, keyboard navigation, focus, or keyboard access, build forms
-  or interactive components accessibly, choose colors for accessibility or contrast, or review code
-  for a11y or accessibility compliance — including when writing HTML/CSS/JS, handling focus, or
-  implementing interactive components. Matches "make this accessible", "fix the a11y", "is this
-  WCAG compliant", "how do I handle keyboard navigation", "help me with screen readers", "check
-  accessibility".
+  Apply for absolutely any request that involves, touches, or concerns accessibility,
+  accessible, a11y, WCAG, screen readers, keyboard navigation, focus, keyboard access, or
+  accessible design — no matter the wording or register. Matches whether the user wants
+  to make something accessible, make it accessible, fix a11y, fix accessibility, check or
+  verify WCAG, check accessibility, handle screen readers, handle keyboard navigation,
+  handle focus, handle keyboard access, build forms or interactive components accessibly,
+  make a form accessible, make a component accessible, choose colors for accessibility or
+  contrast, or review code for a11y or accessibility compliance — including when writing
+  HTML/CSS/JS, handling focus, or implementing interactive components. Matches make this
+  accessible, make it accessible, fix the a11y, fix accessibility, is this WCAG compliant,
+  does this pass WCAG, how do I handle keyboard navigation, how do I make it accessible,
+  help me with screen readers, help me with accessibility, check accessibility, and
+  anything even loosely like it.
   Includes all Level A + AA criteria and new 2.2 additions (focus not obscured, dragging
   alternatives, target size minimum, redundant entry, accessible authentication, consistent help).
 ---

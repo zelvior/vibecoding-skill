@@ -2,13 +2,16 @@
 name: zelvior-ui-principles
 description: >
   Rules for visual hierarchy, whitespace, spacing scales, layout, depth (shadows, elevation),
-  and polish. Apply whenever the user wants to style, format, lay out, arrange, structure,
-  organize, or space out a UI, write or review CSS/HTML, figure out or decide on
-  padding/margin/gap/spacing values, choose shadow, elevation, or depth levels, structure a page
-  or screen layout, handle responsive or mobile design, or improve the overall look, feel,
-  hierarchy, balance, or polish of a UI — e.g. "how should I space this", "how do I lay out the
-  page", "what spacing/padding should I use", "make it look balanced", "how do I structure the
-  layout".
+  and polish. Apply for absolutely any request that involves, touches, or concerns styling,
+  formatting, laying out, arranging, structuring, organizing, spacing, or positioning a UI,
+  interface, screen, or page; writing or reviewing CSS/HTML; figuring out, deciding on, choosing,
+  or setting padding, margin, gap, or spacing values; choosing shadow, elevation, or depth levels;
+  structuring a page or screen layout; handling responsive, mobile, or breakpoint design; or
+  improving the overall look, feel, hierarchy, balance, rhythm, or polish of a UI — no matter the
+  wording or register. Matches how should I space this, how do I lay out the page, how do I
+  structure the layout, what spacing should I use, what padding should I use, what margin should
+  I use, make it look balanced, make it look better, how do I organize the layout, how should I
+  arrange this, and anything even loosely like it.
   NOT for picking specific colors (use zelvior-ui-palettes), fonts (use zelvior-ui-fonts),
   building specific components (use zelvior-ui-components), or accessibility/WCAG compliance
   (use zelvior-ui-a11y).

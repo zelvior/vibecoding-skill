@@ -1,6 +1,6 @@
 ---
 name: zelvior-devops
-description: Zelvior DevOps subskill. Use for any CI/CD, deploy, release, Docker, container, Kubernetes, k8s, Terraform, infrastructure, hosting, server, or SRE work — whenever the user wants to set up, build, configure, deploy, ship, release, host, containerize, manage, automate, provision, or get working infrastructure, CI/CD, pipelines, or production operations, or says "how do I deploy", "set up CI", "containerize this", "get it to production", "help me with the infra", "how should I ship this". Part of zelvior-vibecoding-skill.
+description: Zelvior DevOps subskill. Use for absolutely any request that involves, touches, or concerns CI/CD, deploy, deployment, release, Docker, container, containers, Kubernetes, k8s, Terraform, infrastructure, infra, hosting, host, server, servers, or SRE — no matter the wording or register. Matches whether the user wants to set up, build, configure, deploy, ship, release, publish, host, containerize, manage, automate, provision, orchestrate, or get working infrastructure, infra, CI/CD, pipelines, continuous integration, continuous delivery, or production operations — or says how do I deploy, how do I ship, set up CI, set up CD, containerize this, get it to production, get it live, help me with the infra, help me with deploys, how should I ship this, how do I set up the pipeline, and anything even loosely like it. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior DevOps Subskill
