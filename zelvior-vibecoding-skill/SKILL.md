@@ -1,6 +1,6 @@
 ---
 name: zelvior-vibecoding-skill
-description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, 236 audit tests across 32 modules, 138 page, screen, design-system, and flow checklists, an anti-slop frontend page craft skill, and a lean minimal-change coding mode. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
+description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, 236 audit tests across 32 modules, 138 page, screen, design-system, and flow checklists, an anti-slop frontend page craft skill, a lean minimal-change coding mode, and a focused UI styling knowledge set. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
 ---
 
 # Zelvior Vibecoding Mega Skill
@@ -28,6 +28,7 @@ Read this file first. Then load only the reference files you need for the task. 
 - Copy, brand, or anti-vibe-coded check: read `references/02-anti-patterns.md`.
 - Building or redesigning a landing page, company, product, shop, or game site that must look made-for-the-client rather than templated: use the `zelvior-craft` subskill (anti-slop frontend page skill with a real-browser finish gate).
 - Any coding task that should ship the smallest complete change, or a review/audit that ranks findings and cuts bloat: use the `zelvior-lean` subskill (lean senior-dev mode) and its `zelvior-lean-review`, `zelvior-lean-audit`, `zelvior-lean-debt`, `zelvior-lean-gain`, and `zelvior-lean-help` siblings.
+- Interface styling work: CSS/HTML styles, spacing, hierarchy, colors, fonts, a specific component, or accessibility: use the `zelvior-ui` router and its `zelvior-ui-principles`, `zelvior-ui-palettes`, `zelvior-ui-fonts`, `zelvior-ui-components`, and `zelvior-ui-a11y` subskills.
 
 Subskills in `subskills/` are standalone skills for focused work. Prefer the main skill for full builds. Use a subskill when the user asks for one domain only.
 
@@ -460,6 +461,12 @@ Work is done only when all of these are true:
 - `subskills/zelvior-lean-debt/SKILL.md`: harvests `shortcut:` comments into a tracked debt ledger.
 - `subskills/zelvior-lean-gain/SKILL.md`: measured-savings scoreboard (code, cost, speed).
 - `subskills/zelvior-lean-help/SKILL.md`: quick reference card for lean levels, skills, and commands.
+- `subskills/zelvior-ui/SKILL.md`: UI styling router — picks the right focused subskill for interface work.
+- `subskills/zelvior-ui-principles/SKILL.md`: visual hierarchy, whitespace, spacing scales, layout, depth, and polish.
+- `subskills/zelvior-ui-palettes/SKILL.md`: 12 ready-to-use color palettes with hex/HSL values in a 50–900 shade scale.
+- `subskills/zelvior-ui-fonts/SKILL.md`: curated typeface catalog with weights, licensing, CSS snippets, and pairing tables.
+- `subskills/zelvior-ui-components/SKILL.md`: reference patterns with concrete CSS values for buttons, forms, cards, modals, navs, tables, and more.
+- `subskills/zelvior-ui-a11y/SKILL.md`: WCAG 2.2 Level A + AA accessibility guidelines with actionable implementation rules.
 
 ## Assets and scripts
 
@@ -472,3 +479,4 @@ Work is done only when all of these are true:
 - `subskills/zelvior-craft/scripts/`: the craft page-build kit — `gate.mjs` (finish gate), `start.mjs` (deal/css/brand), `moments.mjs`, `copy-lint.mjs`, `consistency.mjs`, `check.mjs`, `shoot.mjs`, `perf.mjs`, `icons.mjs`, `photos.mjs`, `effects.mjs`.
 - `subskills/zelvior-craft/assets/`, `references/`, `library/`: the craft layout, motion, UI, background, effect, object, moment, scene, diagram, icon, and component kits with their reference docs and design tokens.
 - `subskills/zelvior-lean*/SKILL.md`: the lean mode and its review, audit, debt, gain, and help reference skills.
+- `subskills/zelvior-ui*/SKILL.md`: the UI styling router and its principles, palettes, fonts, components, and accessibility skills.
