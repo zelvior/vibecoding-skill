@@ -1,6 +1,6 @@
 ---
 name: zelvior-vibecoding-skill
-description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, and 236 audit tests across 32 modules. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
+description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, 236 audit tests across 32 modules, and 138 page, screen, design-system, and flow checklists. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
 ---
 
 # Zelvior Vibecoding Mega Skill
@@ -24,6 +24,7 @@ Read this file first. Then load only the reference files you need for the task. 
 - DevOps, deploy, incident, or observability work: read `references/10-devops-sre.md`.
 - Audit, QA, or "is this done" check: read `references/11-audit-checklist.md` and run `scripts/audit.py`.
 - AI search, agent, or llms.txt work: read `references/12-ai-search-agents.md`.
+- Building any specific page or screen: read the matching checklist.design checklists in `references/13-checklist-design-website.md` (27 page types), `references/14-checklist-design-web-app.md` (38 screens), `references/15-checklist-design-design-system.md` (32 design-system foundations and components), `references/16-checklist-design-mobile.md` (28 mobile screens and patterns), and `references/17-checklist-design-flows.md` (13 user flows). 138 checklists total — every item is a required test, nothing is optional.
 - Copy, brand, or anti-vibe-coded check: read `references/02-anti-patterns.md`.
 
 Subskills in `subskills/` are standalone skills for focused work. Prefer the main skill for full builds. Use a subskill when the user asks for one domain only.
@@ -409,6 +410,20 @@ python3 scripts/audit.py ./dist/index.html
 
 Fix every fail. Fix every warn or document the acceptance. Re-run until clean.
 
+## Page, screen, and flow checklists (checklist.design)
+
+138 checklists across five categories. When you build a page, screen, component, or flow, load the matching reference and pass **every item** — these are acceptance tests, not suggestions. A page is not done until its whole checklist is green.
+
+| Reference | Category | Count | What it covers |
+| --- | --- | --- | --- |
+| `references/13-checklist-design-website.md` | Website | 27 | Security, event, about, privacy/legal, features, testimonials, affiliate, coming soon, compare, status, billing, landing, waitlist, press/media, team, cart, footer, search, careers, blog post, contact, pricing, FAQ, 404, login, blog, sign-up |
+| `references/14-checklist-design-web-app.md` | Web App | 38 | Home, dashboard, analytics, reporting, report view, data table, list view, feed, notifications, notification settings, feedback, comments, chat, empty state, onboarding, multi-step form, search results, single item detail, admin panel, user management, account, public profile, settings, API keys, integrations, version history, audit log, document view, billing, checkout, pricing, upgrade, maintenance, 2FA, login, help center, kanban, timeline/Gantt |
+| `references/15-checklist-design-design-system.md` | Design System | 32 | Foundations: typography, accessibility, spacing/grid, color system, tokens. Components: button, icon, badge, card, avatar, input field, searchbar, checkbox, radio, toggle, tabs, table, tooltip, dropdown menu, loading, skeleton, alert, banner, toast, accordion, carousel, slider, date picker, breadcrumb, modal, drawer, stepper |
+| `references/16-checklist-design-mobile.md` | Mobile App | 28 | Push notification opt-in, gesture navigation, splash screen, checkout, tab bar navigation, in-app notifications, action sheet, billing, search, camera, map view, onboarding checklist, paywall, onboarding, dashboard, profile, chat, settings, in-app browser, cart, login, sign-up, account, upgrade, activity feed, feedback, referral, invite |
+| `references/17-checklist-design-flows.md` | Flows | 13 | Adding to cart, uploading media, verifying account, canceling subscription, filtering items, saving changes, entering promo code, showing input error, resetting password, deleting account, contacting support, making a card payment, submitting a form |
+
+Use them in the build loop: design the screen from the design-system checklist, implement it from the page/screen checklist, and make the flow checklist the acceptance path for multi-step journeys.
+
 ## Definition of done
 
 Work is done only when all of these are true:
@@ -423,6 +438,7 @@ Work is done only when all of these are true:
 - Every form has labels, inline errors, success confirmation, and a thank you page.
 - Every email is clickable. Every phone number is clickable. Mobile menu and sticky mobile CTA work.
 - No banned pattern from `references/02-anti-patterns.md` remains in the build.
+- Every page, screen, component, and flow built passes its full checklist.design checklist from `references/13-checklist-design-*.md` — no item skipped or hand-waved.
 - `scripts/audit.py` passes with zero fails and zero unaddressed warns.
 - Deploy has health checks, monitoring, alerts, and a tested rollback.
 

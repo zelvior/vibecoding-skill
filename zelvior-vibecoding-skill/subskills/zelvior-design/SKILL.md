@@ -7,6 +7,16 @@ description: Zelvior design system subskill. Use for UI/UX, visual design, compo
 
 Build distinctive, restrained, production-grade UI. Read `../../references/01-design-system.md` and `../../references/02-anti-patterns.md` for full detail.
 
+## Page, screen, and flow checklists
+
+138 checklist.design checklists cover every page type, app screen, design-system component, and user flow. Read the matching file and pass every item before calling a screen done:
+
+- `../../references/13-checklist-design-website.md` — 27 website page types
+- `../../references/14-checklist-design-web-app.md` — 38 web app screens
+- `../../references/15-checklist-design-design-system.md` — 32 foundations and components
+- `../../references/16-checklist-design-mobile.md` — 28 mobile screens and patterns
+- `../../references/17-checklist-design-flows.md` — 13 user flows
+
 ## Must-have patterns
 
 Skeleton loaders, optimistic updates, command menu, shortcut hints, undo toasts, stale-while-revalidate, pre-rendering, BlurHash placeholders, view transitions, swipe-to-dismiss sheets, interruptable animations, predictive back, hit slop (44px), safe area insets, one-time code autofill, tabular numbers, balanced headlines, continuous corners, indempotency keys, Amazon safe triangle, no horizontal scroll, clickable emails and phones, mobile menu, clear error and success messages, custom 404 and error pages, custom thank you pages, mobile breakpoints, sticky mobile CTA, loading states, form error states, cookie banner.
