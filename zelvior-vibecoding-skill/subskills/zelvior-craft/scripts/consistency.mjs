@@ -283,7 +283,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve, dirname, basename, extname, relative, sep, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { inflateSync } from 'node:zlib';
-import { requireChrome, launchBrowser } from './_legacy.mjs';
+import { requireChrome, launchBrowser, requireBrowserGlobals } from './_legacy.mjs';
 
 requireChrome('consistency');
 
@@ -4600,7 +4600,9 @@ for (const f of readdirSync(outDir)) if (/^(sweep-)?\d{3,4}-.+\.jpg$/.test(f)) u
 
 // ---------------------------------------------------------------- our own browser engine (Obscura or Chrome): own profile, stopped by its own PID
 async function launch() {
-  if (typeof WebSocket === 'undefined') throw new Error('Node 22+ is required (no built-in WebSocket in ' + process.version + ')');
+  // Node 22+ global WebSocket is required for the CDP socket; on older Node,
+  // requireChrome() above routed to the MANUAL fallback. This is a safety net.
+  requireBrowserGlobals('consistency');
   const dir = join(PROFILE, `run-${process.pid}-${Date.now().toString(36)}`);
   const { port, pid, kill, cleanup } = await launchBrowser({ tool: 'consistency', profile: dir, windowSize: '1440,900' });
   const stop = kill;

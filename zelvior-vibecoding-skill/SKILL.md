@@ -498,13 +498,17 @@ and `start.mjs` run on any system with Node.js 14+. They need no browser.
 
 **Browser-dependent craft scripts** (`gate.mjs`, `consistency.mjs`, `shoot.mjs`,
 `perf.mjs`, `moments.mjs`, `effects.mjs`, `icons.mjs`, `assets/layout/check.mjs`,
-`assets/backgrounds/check.mjs`) need Node.js 22+ and a browser engine. They
-prefer **Obscura** (a portable single-binary headless browser, ~70 MB, CDP-compatible)
-and fall back to Chrome, Edge, or Chromium. When no browser engine is present,
-they do not crash: they print a MANUAL-mode message and exit with code 3, and
+`assets/backgrounds/check.mjs`) need a browser engine and, for the automated
+check, Node.js 22+ (global `WebSocket` and `fetch`). They prefer **Obscura** (a
+portable single-binary headless browser, ~70 MB, CDP-compatible) and fall back
+to Chrome, Edge, or Chromium. They degrade gracefully on older Node and on hosts
+without an engine — they never crash: if the `WebSocket`/`fetch` globals or the
+engine are missing, they print a MANUAL-mode message and exit with code 3, and
 you follow the documented manual verification path (screenshot the built page
 at 1440 / 1024 / 768 / 390 px, check the craft checklist by eye, lint the copy
 with `copy-lint.mjs`, and record a `GATE: MANUAL <tool> <pass|open>` line).
+The network-download scripts (`icons.mjs fetch`, `photos.mjs search/fetch`)
+work on Node 14+ via a dependency-free `fetch` polyfill.
 
 **Check your environment:** run `python3 scripts/compat.py`. It probes Python,
 Node.js, and the browser engine and reports FULL, PARTIAL, or MANUAL mode.

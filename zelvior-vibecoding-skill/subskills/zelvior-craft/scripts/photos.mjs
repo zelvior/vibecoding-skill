@@ -78,6 +78,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { installFetchCompat } from './_legacy.mjs';
+
+// Installs a dependency-free fetch on Node < 18 so the live Wikimedia Commons
+// downloads (search/fetch) work on ancient Node. No-op on Node 18+.
+installFetchCompat();
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 // a path printed in a command: absolute, forward slashes, quoted when it holds a space (the same in Git Bash, PowerShell and cmd)
