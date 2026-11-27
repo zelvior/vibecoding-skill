@@ -428,7 +428,7 @@ function pick() {
 
   const recent = mine.slice(-8);
   const uses = (p) => recent.filter((d) => d.ids.includes(p.id)).length;
-  const last = new Set(mine.at(-1)?.ids || []);
+  const last = new Set((mine[mine.length - 1] || {}).ids || []);
   const leadsBack = (n) => new Set(mine.slice(-n).map((d) => d.lead));
   // frames another build on this machine was dealt or fetched lately (the shared recent file): behind the fresh ones,
   // ahead of a better hint, so two builds of one trade in two folders do not show the same frames
@@ -848,7 +848,7 @@ function pageWeight(dir, photos) {
     const fl = (c.files || []).filter((n) => !crop.test(n)).map((n) => ({ n, w: +(/-(\d+)\.\w+$/.exec(n) || [0, 1e9])[1] || 1e9, p: path.join(dir, n) })).filter((f) => fs.existsSync(f.p)).sort((a, b) => a.w - b.w);
     if (!fl.length) continue;
     const hero = (c.files || []).some((n) => crop.test(n));
-    const f = hero ? fl.at(-1) : (fl.find((x) => x.w >= 1440) || fl.at(-1));
+    const f = hero ? fl[fl.length - 1] : (fl.find((x) => x.w >= 1440) || fl[fl.length - 1]);
     rows.push({ id: c.id, n: f.n, kb: kb(f.p), hero });
   }
   return rows;
@@ -883,7 +883,7 @@ async function fetchCmd() {
         if (!have.length) throw new Error('its files are missing from assets/photos/img');
         let use = isHero ? have : have.filter((f) => f.w <= 1280);
         if (!use.length) use = [have[0]];
-        if (bigger.has(id) && !isHero) use = [...use, have.at(-1)];
+        if (bigger.has(id) && !isHero) use = [...use, have[have.length - 1]];
         use = [...new Map(use.map((f) => [f.w, f])).values()].sort((x, y) => x.w - y.w);
         for (const f of use) {
           const name = 'photo-' + id + '-' + f.w + path.extname(f.file);
@@ -911,12 +911,12 @@ async function fetchCmd() {
       for (const f of files.filter((x) => x.kb > capKb)) { fs.rmSync(path.join(dir, f.file), { force: true }); dropped.push(f); }
       files = files.filter((f) => f.kb <= capKb);
     }
-    const src = isHero ? (files.find((f) => f.w >= 1440) || files.at(-1)) : files.at(-1);
+    const src = isHero ? (files.find((f) => f.w >= 1440) || files[files.length - 1]) : files[files.length - 1];
     srcName = src.file; srcW = src.w;
     // the hero's phone crop (PH-28): 780x975 around the subject, for a <picture> source at 639px and under
     let crop = null;
     if (isHero) {
-      const from = files.find((f) => f.w / p.ratio >= HERO_CROP.h) || files.at(-1), name = 'photo-' + id + '-' + HERO_CROP.w + 'x' + HERO_CROP.h + '.webp';
+      const from = files.find((f) => f.w / p.ratio >= HERO_CROP.h) || files[files.length - 1], name = 'photo-' + id + '-' + HERO_CROP.w + 'x' + HERO_CROP.h + '.webp';
       if (cropFile(path.join(dir, from.file), path.join(dir, name), p.focus)) crop = { file: name, kb: kb(path.join(dir, name)) };
     }
     names = [...files.map((f) => f.file), ...(crop ? [crop.file] : [])];

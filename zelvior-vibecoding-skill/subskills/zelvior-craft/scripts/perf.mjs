@@ -257,7 +257,7 @@ function analyse(m, W, timed, glRun, load) {
   const by = {};
   own.forEach(r => {
     const t = { Script: 'js', Stylesheet: 'css', Image: 'img', Font: 'font', Document: 'html', Media: 'media' }[r.type] || 'other';
-    (by[t] ||= { n: 0, bytes: 0 }); by[t].n++; by[t].bytes += r.bytes || r.decoded;
+    (by[t] = by[t] || { n: 0, bytes: 0 }); by[t].n++; by[t].bytes += r.bytes || r.decoded;
   });
   const g = t => (by[t]?.bytes || 0);
   const total = own.reduce((a, r) => a + (r.bytes || r.decoded), 0);
