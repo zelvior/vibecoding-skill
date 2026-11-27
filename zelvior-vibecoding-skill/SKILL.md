@@ -29,6 +29,7 @@ Read this file first. Then load only the reference files you need for the task. 
 - Building or redesigning a landing page, company, product, shop, or game site that must look made-for-the-client rather than templated: use the `zelvior-craft` subskill (anti-slop frontend page skill with a real-browser finish gate).
 - Any coding task that should ship the smallest complete change, or a review/audit that ranks findings and cuts bloat: use the `zelvior-lean` subskill (lean senior-dev mode) and its `zelvior-lean-review`, `zelvior-lean-audit`, `zelvior-lean-debt`, `zelvior-lean-gain`, and `zelvior-lean-help` siblings.
 - Interface styling work: CSS/HTML styles, spacing, hierarchy, colors, fonts, a specific component, or accessibility: use the `zelvior-ui` router and its `zelvior-ui-principles`, `zelvior-ui-palettes`, `zelvior-ui-fonts`, `zelvior-ui-components`, and `zelvior-ui-a11y` subskills.
+- How to approach any coding task — writing, reviewing, or refactoring code without overcomplicating, making surgical changes, surfacing assumptions, and defining verifiable success criteria: use the `zelvior-discipline` subskill (behavioral coding guidelines). Applies to every build and every change.
 
 Subskills in `subskills/` are standalone skills for focused work. Prefer the main skill for full builds. Use a subskill when the user asks for one domain only.
 
@@ -467,6 +468,7 @@ Work is done only when all of these are true:
 - `subskills/zelvior-ui-fonts/SKILL.md`: curated typeface catalog with weights, licensing, CSS snippets, and pairing tables.
 - `subskills/zelvior-ui-components/SKILL.md`: reference patterns with concrete CSS values for buttons, forms, cards, modals, navs, tables, and more.
 - `subskills/zelvior-ui-a11y/SKILL.md`: WCAG 2.2 Level A + AA accessibility guidelines with actionable implementation rules.
+- `subskills/zelvior-discipline/SKILL.md`: behavioral coding guidelines — think before coding, simplicity first, surgical changes, goal-driven execution. Applies to every build and change.
 
 ## Assets and scripts
 
