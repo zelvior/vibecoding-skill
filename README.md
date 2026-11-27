@@ -30,10 +30,24 @@ Most "vibe coding" produces slop: pretty pages that fail accessibility, slow Cor
 | 🪶 **Lean coding mode** | Smallest change that fully solves the task |
 | 🎯 **Behavioral discipline** | Four principles that govern how every change is made |
 
+## Connect with Zelvior Labs
+
+Find Zelvior Labs and support the project across the web:
+
+| | |
+|---|---|
+| [![npm](https://img.shields.io/badge/npm-zelnpm-cb3837?style=for-the-badge)](https://www.npmjs.com/~zelnpm) | [![ORCID](https://img.shields.io/badge/ORCID-0009--0009--2376--367X-4c8c66?style=for-the-badge)](https://orcid.org/0009-0009-2376-367X) |
+| [![YouTube](https://img.shields.io/badge/YouTube-zelviorhere-ff0000?style=for-the-badge)](https://youtube.com/@zelviorhere) | [![Linktree](https://img.shields.io/badge/Linktree-zelvior-1db954?style=for-the-badge)](https://linktr.ee/zelvior) |
+| [![Discord](https://img.shields.io/badge/Discord-Zelvior-5865f2?style=for-the-badge)](https://discord.gg/UQfzQzymc) | [![Donate](https://img.shields.io/badge/Donate-Zelvior-f38029?style=for-the-badge)](https://nowpayments.io/donation/zelviorhere) |
+| [![X](https://img.shields.io/badge/X-zelviorhere-000000?style=for-the-badge)](https://x.com/zelviorhere) | [![Website](https://img.shields.io/badge/Website-zelviorlabs-6366f1?style=for-the-badge)](https://zelviorlabs.vercel.app) |
+| [![Blog](https://img.shields.io/badge/Blog-zelvior-ff8c00?style=for-the-badge)](https://zelvior.blogspot.com) | [![GitHub Org](https://img.shields.io/badge/GitHub%20Org-ZelviorLabs-181717?style=for-the-badge)](https://github.com/Zelvior-Labs) |
+| [![GitHub](https://img.shields.io/badge/GitHub-zelvior-181717?style=for-the-badge)](https://github.com/zelvior) | |
+
 ## Table of contents
 
 - [How it works](#how-it-works)
 - [What is inside](#what-is-inside)
+- [Connect with Zelvior Labs](#connect-with-zelvior-labs)
 - [Quick start](#quick-start)
 - [Legacy compatibility](#legacy-compatibility)
 - [Documentation](#documentation)

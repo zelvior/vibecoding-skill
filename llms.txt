@@ -23,6 +23,20 @@ python3 zelvior-vibecoding-skill/scripts/compat.py            # check environmen
 python3 zelvior-vibecoding-skill/scripts/audit.py https://example.com
 ```
 
+## Zelvior Labs links
+
+- npm: https://www.npmjs.com/~zelnpm
+- ORCID: https://orcid.org/0009-0009-2376-367X
+- YouTube: https://youtube.com/@zelviorhere
+- Linktree: https://linktr.ee/zelvior
+- Discord: https://discord.gg/UQfzQzymc
+- Donate: https://nowpayments.io/donation/zelviorhere
+- X / Twitter: https://x.com/zelviorhere
+- Website: https://zelviorlabs.vercel.app
+- Blog: https://zelvior.blogspot.com
+- GitHub organization: https://github.com/Zelvior-Labs
+- GitHub user: https://github.com/zelvior
+
 ## Key links
 
 - [README](README.md): overview, full contents, and quick start.
