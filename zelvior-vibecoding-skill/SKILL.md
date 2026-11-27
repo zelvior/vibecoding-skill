@@ -480,3 +480,40 @@ Work is done only when all of these are true:
 - `subskills/zelvior-craft/assets/`, `references/`, `library/`: the craft layout, motion, UI, background, effect, object, moment, scene, diagram, icon, and component kits with their reference docs and design tokens.
 - `subskills/zelvior-lean*/SKILL.md`: the lean mode and its review, audit, debt, gain, and help reference skills.
 - `subskills/zelvior-ui*/SKILL.md`: the UI styling router and its principles, palettes, fonts, components, and accessibility skills.
+
+## Legacy compatibility and requirements
+
+This skill is designed to run across a wide range of systems, from modern
+machines down to older legacy hardware. What runs where:
+
+**Always runnable (any OS):** all Markdown knowledge — the root `SKILL.md`,
+every `references/` file, and every `subskills/*/SKILL.md`. These are plain
+text and need nothing but a viewer. `scripts/audit.py` also runs anywhere
+with Python 3.6+ (Python 3.8 is the last version that installs on Windows 7).
+
+**Browser-free craft scripts:** `subskills/zelvior-craft/scripts/copy-lint.mjs`
+and `start.mjs` run on any system with Node.js 14+. They need no browser.
+
+**Browser-dependent craft scripts** (`gate.mjs`, `consistency.mjs`, `shoot.mjs`,
+`perf.mjs`, `moments.mjs`, `effects.mjs`, `icons.mjs`, `assets/layout/check.mjs`,
+`assets/backgrounds/check.mjs`) need Node.js 22+ and a browser engine. They
+prefer **Obscura** (a portable single-binary headless browser, ~70 MB, CDP-compatible)
+and fall back to Chrome, Edge, or Chromium. When no browser engine is present,
+they do not crash: they print a MANUAL-mode message and exit with code 3, and
+you follow the documented manual verification path (screenshot the built page
+at 1440 / 1024 / 768 / 390 px, check the craft checklist by eye, lint the copy
+with `copy-lint.mjs`, and record a `GATE: MANUAL <tool> <pass|open>` line).
+
+**Check your environment:** run `python3 scripts/compat.py`. It probes Python,
+Node.js, and the browser engine and reports FULL, PARTIAL, or MANUAL mode.
+
+**Browser engine requirements:** the browser-dependent checks need a modern
+OS — Node 22+ prebuilts require Windows 10+, macOS 13.5+, and Linux with
+glibc 2.28+. Obscura additionally requires x86_64 (no 32-bit build) and, on
+Linux, glibc 2.35+ (Ubuntu 22.04+). Chrome 110+ dropped Windows 7/8/8.1.
+On genuinely old systems (e.g. Windows 7 32-bit, very old Linux or macOS),
+the browser-dependent checks use the MANUAL path — everything else still runs.
+
+To install Obscura, download the release archive from its repository and put
+the `obscura` binary on `PATH` or set `OBSCURA_PATH`. To use Chrome/Edge/Chromium
+instead, set `CHROME_PATH` to its executable.
