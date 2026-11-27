@@ -36,10 +36,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import http from 'node:http';
-import { spawn, execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { pick as dealEffects, filterEffects, SLOTS, KINDS } from '../assets/effects/pick.js';
 import { pageKind } from './moments.mjs';
+import { requireChrome, launchBrowser } from './_legacy.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const FX = path.join(ROOT, 'assets', 'effects');
@@ -383,14 +383,6 @@ function serve(a) {
 
 /* ------------------------------------------------------------------ chrome (shot, perf) */
 
-function findChrome() {
-  const c = [process.env.CHROME, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean);
-  const f = c.find(p => fs.existsSync(p));
-  if (!f) die('no Chrome found (set CHROME=path)');
-  return f;
-}
-
 class CDP {
   constructor(ws) {
     this.ws = ws; this.n = 0; this.pending = new Map(); this.handlers = [];
@@ -425,32 +417,13 @@ async function launch(a) {
   // default Chrome profile folder: --profile, else $ZELVIOR_CRAFT_TMP/chrome/<tool>-<pid>, else a fresh folder under the system temp dir
   const defaultProfile = () => process.env.ZELVIOR_CRAFT_TMP ? path.join(process.env.ZELVIOR_CRAFT_TMP, 'chrome', 'fx-' + process.pid) : path.join(os.tmpdir(), 'zelvior-craft-fx-' + process.pid);
   const profile = a.profile && a.profile !== true ? inProject(a.profile, 'fx') : path.resolve(defaultProfile());
-  fs.mkdirSync(profile, { recursive: true });
-  const portFile = path.join(profile, 'DevToolsActivePort');
-  try { fs.rmSync(portFile); } catch (_) { /* none */ }
   const w = +(a.w || 1440), h = +(a.h || 900);
-  const args = [
-    '--headless=new', `--user-data-dir=${profile}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check',
-    '--disable-extensions', '--hide-scrollbars', '--mute-audio', '--disable-background-timer-throttling',
-    '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows', `--window-size=${w},${h}`,
-  ];
-  if (a.gpu) args.push('--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=d3d11', '--enable-unsafe-webgpu');
-  else args.push('--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'); // WebGL on the CPU: several GPU Chromes at once crashed an integrated GPU
-  args.push('about:blank');
-  const child = spawn(findChrome(), args, { stdio: 'ignore', windowsHide: true });
-  let port = null;
-  for (let i = 0; i < 150 && !port; i++) {
-    await sleep(100);
-    try { if (fs.existsSync(portFile)) port = parseInt(fs.readFileSync(portFile, 'utf8').split('\n')[0], 10) || null; } catch (_) { /* still being written */ }
-  }
+  const { port, pid, kill, cleanup } = await launchBrowser({ tool: 'effects', profile, windowSize: `${w},${h}`, gpu: !!a.gpu });
   const close = async (cdp) => {
     try { if (cdp) await Promise.race([cdp.send('Browser.close'), sleep(3000)]); } catch (_) { /* closing */ }
-    for (let i = 0; i < 40 && child.exitCode == null; i++) await sleep(100);
-    if (child.exitCode == null) {
-      try { execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); } catch (_) { try { child.kill(); } catch (_) { /* gone */ } }
-    }
+    await sleep(400);
+    await cleanup();
   };
-  if (!port) { await close(null); die('Chrome did not start (no DevToolsActivePort)'); }
   const ver = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
   const ws = new WebSocket(ver.webSocketDebuggerUrl);
   await new Promise((res, rej) => { ws.addEventListener('open', res, { once: true }); ws.addEventListener('error', rej, { once: true }); });
@@ -476,7 +449,7 @@ async function launch(a) {
     await S('Page.navigate', { url });
     await Promise.race([loaded, sleep(15000)]);
   };
-  return { cdp, S, evalJS, goto, logs, close: () => close(cdp), w, h, pid: child.pid };
+  return { cdp, S, evalJS, goto, logs, close: () => close(cdp), w, h, pid };
 }
 
 const FX_REPORT = `(() => {
@@ -488,6 +461,7 @@ const FX_REPORT = `(() => {
 })()`;
 
 async function shot(a) {
+  requireChrome('effects');
   if (!a.url || !a.out) die('shot: --url and --out are required');
   const b = await launch(a);
   try {
@@ -529,6 +503,7 @@ async function shot(a) {
 }
 
 async function perf(a) {
+  requireChrome('effects');
   if (!a.url) die('perf: --url is required');
   const b = await launch(a);
   const secs = +(a.seconds || 5);

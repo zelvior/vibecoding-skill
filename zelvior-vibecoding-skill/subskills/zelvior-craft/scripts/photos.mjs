@@ -84,7 +84,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const slash = (p) => path.resolve(p).replace(/\\/g, '/');
 const cmdPath = (p) => (/\s/.test(slash(p)) ? '"' + slash(p) + '"' : slash(p));
 const LIB_FILE = path.join(HERE, '..', 'assets', 'photos', 'photos.json');
-const UA = 'zelvior-craft-photos/1.0 (+https://github.com/Leonxlnx/zelvior-craft)';
+const UA = 'zelvior-craft-photos/1.0';
 const lib = JSON.parse(fs.readFileSync(LIB_FILE, 'utf8'));
 const byId = new Map(lib.photos.map((p) => [p.id, p]));
 

@@ -1,6 +1,6 @@
 ---
 name: zelvior-audit
-description: Zelvior audit subskill. Use to audit a site against all 236 tests across 32 modules and fix every fail and warn. Part of zelvior-vibecoding-skill.
+description: Zelvior audit subskill. Use for absolutely any request that involves auditing, checking, scanning, testing, verifying, reviewing, or assessing a site against all 236 tests across 32 modules and fixing every fail and warn — no matter how the user phrases it, in any register. Matches whether the user wants to audit, check, scan, test, verify, review, assess, evaluate, run the audit, run the checks, run the tests, or run the scan on a site; asks if their site passes, is passing, passes the audit, is good, is done, is complete, is up to standard, or meets the bar; asks what's wrong, what's failing, what's broken, what's missing, what needs fixing, what's not passing; wants to find and fix what's failing, clean up issues, fix the fails, address the warnings; or says can you check my site, run the audit, run the checks, is my site passing, does my site pass, how's my site doing, audit my site, check this site, scan the site, and anything even loosely like it. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior Audit Subskill

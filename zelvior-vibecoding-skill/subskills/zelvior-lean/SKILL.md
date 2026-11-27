@@ -2,10 +2,20 @@
 name: zelvior-lean
 description: >
   Lazy senior dev mode: the smallest change that fully solves the task, and a
-  reply a busy human understands in one read. Use on any coding task (writing,
-  fixing, refactoring, reviewing, choosing dependencies) and when the user says
-  "zelvior-lean", "be lazy", "simplest solution", "yagni", or complains about
-  over-engineering or bloat. Levels: lite, full (default), ultra.
+  reply a busy human understands in one read. Use on absolutely any coding task
+  (writing, fixing, editing, refactoring, reviewing, choosing dependencies,
+  reworking, rewriting, cleaning up) and for absolutely any request or complaint
+  that involves, wants, asks for, or mentions keeping it minimal, simple, lean,
+  small, tiny, compact, the smallest change, the least code, just enough, just
+  the essentials, nothing extra, don't overcomplicate, don't over-engineer,
+  don't bloat, don't gold-plate, don't go overboard, don't add extra, nothing
+  speculative, trim it, trim this, cut the fat, cut scope, cut it down, simplify,
+  streamline, pare down, or says zelvior-lean, be lazy, simplest solution,
+  simplest fix, simplest approach, yagni, keep it small, keep it minimal, keep
+  it lean, minimal fix, minimal change, just make it work, just enough, I don't
+  need all that, and anything even loosely like it — or complains about
+  over-engineering, bloat, too much code, too complex, complexity, unnecessary
+  stuff, or extra fluff. Levels: lite, full (default), ultra.
 argument-hint: "[lite|full|ultra|off]"
 license: MIT
 ---
