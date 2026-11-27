@@ -1,6 +1,6 @@
 ---
 name: zelvior-vibecoding-skill
-description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, 236 audit tests across 32 modules, and 138 page, screen, design-system, and flow checklists. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
+description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, 236 audit tests across 32 modules, 138 page, screen, design-system, and flow checklists, an anti-slop frontend page craft skill, and a lean minimal-change coding mode. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
 ---
 
 # Zelvior Vibecoding Mega Skill
@@ -26,6 +26,8 @@ Read this file first. Then load only the reference files you need for the task. 
 - AI search, agent, or llms.txt work: read `references/12-ai-search-agents.md`.
 - Building any specific page or screen: read the matching checklist.design checklists in `references/13-checklist-design-website.md` (27 page types), `references/14-checklist-design-web-app.md` (38 screens), `references/15-checklist-design-design-system.md` (32 design-system foundations and components), `references/16-checklist-design-mobile.md` (28 mobile screens and patterns), and `references/17-checklist-design-flows.md` (13 user flows). 138 checklists total — every item is a required test, nothing is optional.
 - Copy, brand, or anti-vibe-coded check: read `references/02-anti-patterns.md`.
+- Building or redesigning a landing page, company, product, shop, or game site that must look made-for-the-client rather than templated: use the `zelvior-craft` subskill (anti-slop frontend page skill with a real-browser finish gate).
+- Any coding task that should ship the smallest complete change, or a review/audit that ranks findings and cuts bloat: use the `zelvior-lean` subskill (lean senior-dev mode) and its `zelvior-lean-review`, `zelvior-lean-audit`, `zelvior-lean-debt`, `zelvior-lean-gain`, and `zelvior-lean-help` siblings.
 
 Subskills in `subskills/` are standalone skills for focused work. Prefer the main skill for full builds. Use a subskill when the user asks for one domain only.
 
@@ -440,6 +442,7 @@ Work is done only when all of these are true:
 - No banned pattern from `references/02-anti-patterns.md` remains in the build.
 - Every page, screen, component, and flow built passes its full checklist.design checklist from `references/13-checklist-design-*.md` — no item skipped or hand-waved.
 - `scripts/audit.py` passes with zero fails and zero unaddressed warns.
+- A page built with the `zelvior-craft` subskill passes its finish gate (`subskills/zelvior-craft/scripts/gate.mjs` ends `GATE: PASS` or `GATE: OPEN`), and every waiver is recorded with its reason.
 - Deploy has health checks, monitoring, alerts, and a tested rollback.
 
 ## Subskills
@@ -450,6 +453,13 @@ Work is done only when all of these are true:
 - `subskills/zelvior-seo-performance/SKILL.md`: SEO, performance, and Core Web Vitals.
 - `subskills/zelvior-devops/SKILL.md`: CI/CD, infra, deploys, and SRE.
 - `subskills/zelvior-audit/SKILL.md`: the 236-test audit checklist and how to run it.
+- `subskills/zelvior-craft/SKILL.md`: anti-slop frontend page skill. Builds client-grade landing, company, product, and game pages from a dealt system, with a real-browser checker and finish gate. Full kit (references, assets, library, scripts) lives in the same folder.
+- `subskills/zelvior-lean/SKILL.md`: lean senior-dev mode — the smallest complete change that fully solves the task.
+- `subskills/zelvior-lean-review/SKILL.md`: ranked quality review of a change (bugs, risk, load, tests, speed, lean).
+- `subskills/zelvior-lean-audit/SKILL.md`: ranked one-shot audit of a whole repo.
+- `subskills/zelvior-lean-debt/SKILL.md`: harvests `shortcut:` comments into a tracked debt ledger.
+- `subskills/zelvior-lean-gain/SKILL.md`: measured-savings scoreboard (code, cost, speed).
+- `subskills/zelvior-lean-help/SKILL.md`: quick reference card for lean levels, skills, and commands.
 
 ## Assets and scripts
 
@@ -459,3 +469,6 @@ Work is done only when all of these are true:
 - `assets/sitemap.xml`: sitemap template.
 - `assets/404.html`: custom 404 template.
 - `scripts/audit.py`: local audit script implementing the highest-signal checks from all 32 modules.
+- `subskills/zelvior-craft/scripts/`: the craft page-build kit — `gate.mjs` (finish gate), `start.mjs` (deal/css/brand), `moments.mjs`, `copy-lint.mjs`, `consistency.mjs`, `check.mjs`, `shoot.mjs`, `perf.mjs`, `icons.mjs`, `photos.mjs`, `effects.mjs`.
+- `subskills/zelvior-craft/assets/`, `references/`, `library/`: the craft layout, motion, UI, background, effect, object, moment, scene, diagram, icon, and component kits with their reference docs and design tokens.
+- `subskills/zelvior-lean*/SKILL.md`: the lean mode and its review, audit, debt, gain, and help reference skills.
