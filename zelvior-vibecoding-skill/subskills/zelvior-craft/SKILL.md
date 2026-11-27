@@ -35,7 +35,7 @@ Build the website a good company would ship: it says plainly what is sold, shows
 every screen, and looks made for this client, not from a template and not like an art piece.
 figma.com and x.ai are the bar (in words: `layout-v4.md` section 1).
 
-`<skill>` is this folder. It needs Node 22+ and Chrome, Edge or Chromium (ffmpeg optional).
+`<skill>` is this folder. The browser-free scripts need Node 14+; the browser-dependent checks run best on Node 22+ with Chrome, Edge or Chromium (ffmpeg optional) and degrade to MANUAL mode on older Node or without an engine.
 
 ## House rules
 
@@ -397,21 +397,24 @@ skill degrades gracefully on older systems instead of failing hard.
 (`check`, `list`), and `icons.mjs` (`fetch`, `scan`). These need no browser
 and run on any system with Node 14+.
 
-**Browser-dependent (Node 22+ + a browser engine):** `gate.mjs`,
-`consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs shot`,
+**Browser-dependent (Node 22+ for the automated check + a browser engine):**
+`gate.mjs`, `consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs shot`,
 `effects.mjs shot|perf`, `icons.mjs measure`, `assets/layout/check.mjs`, and
 `assets/backgrounds/check.mjs`. They prefer **Obscura** (a portable
 single-binary headless browser, ~70 MB, CDP-compatible) and fall back to
 Chrome, Edge, or Chromium. The shared launcher in `scripts/_legacy.mjs`
 detects the engine, launches it with the right flags, and waits for its CDP
-port to be ready.
+port to be ready. On Node < 22 (no global `WebSocket`/`fetch`) or without an
+engine, they degrade gracefully to MANUAL mode instead of crashing.
 
-**When no browser engine is present:** the browser-dependent scripts do not
-crash. They print a MANUAL-mode message and exit with code 3. Follow the
-manual verification path: open the built page in any browser, screenshot it
-at 1440, 1024, 768 and 390 px, check every item in the Checklist (section 5)
-by eye, lint the copy with `copy-lint.mjs` (no browser needed), and record the
-result as a GATE line: `GATE: MANUAL <tool> <pass|open>`.
+**When no browser engine or modern Node is present:** the browser-dependent
+scripts do not crash. They print a MANUAL-mode message and exit with code 3.
+Follow the manual verification path: open the built page in any browser,
+screenshot it at 1440, 1024, 768 and 390 px, check every item in the
+Checklist (section 5) by eye, lint the copy with `copy-lint.mjs` (no browser
+needed), and record the result as a GATE line: `GATE: MANUAL <tool> <pass|open>`.
+The network-download scripts (`icons.mjs fetch`, `photos.mjs search/fetch`)
+run on Node 14+ via a dependency-free `fetch` polyfill.
 
 **Check your environment:** run `python3 ../scripts/compat.py` (from the
 craft folder) or `python3 scripts/compat.py` from the repo root. It probes

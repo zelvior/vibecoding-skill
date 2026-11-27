@@ -1,6 +1,6 @@
 # Zelvior Vibecoding Mega Skill
 
-> A senior-level mega skill for building production websites and apps that pass a strict, opinionated audit. It routes any web or coding task to the right design, backend, security, SEO, performance, accessibility, and audit knowledge, then verifies the result against a 236-test audit.
+> Made by **Zelvior Labs**. A senior-level mega skill for building production websites and apps that pass a strict, opinionated audit. It routes any web or coding task to the right design, backend, security, SEO, performance, accessibility, and audit knowledge, then verifies the result against a 236-test audit.
 
 ## Summary
 

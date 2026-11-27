@@ -1,6 +1,6 @@
 # Zelvior Vibecoding Mega Skill
 
-![Zelvior](images/logo.png)
+**Made by Zelvior Labs.**
 
 ![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.6%2B-blue.svg)
@@ -9,8 +9,6 @@
 ![Skills](https://img.shields.io/badge/skills-21%20subskills-9b59b6)
 ![Checklists](https://img.shields.io/badge/checklists-138-7c3aed)
 ![Audit](https://img.shields.io/badge/audit-236%20tests-e8590c)
-
-![Banner](images/banner.png)
 
 **A senior-level mega skill for building production websites and apps that pass a strict, opinionated audit.** It merges design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, a 236-test audit across 32 modules, 138 page/screen/design-system/flow checklists, an anti-slop frontend craft skill, a lean minimal-change coding mode, a UI styling knowledge set, and behavioral coding guidelines — into one description-driven routing system.
 
@@ -45,8 +43,6 @@ Most "vibe coding" produces slop: pretty pages that fail accessibility, slow Cor
 ## How it works
 
 The skill is a **description-driven routing system**. The root `SKILL.md` is the entry point; each `description` in a SKILL.md's frontmatter is the trigger that decides when a skill loads. The agent reads the routing map, matches the task against the triggers, and loads only the matching file — never everything at once.
-
-![Architecture](images/architecture.png)
 
 ```
 User request
@@ -162,7 +158,8 @@ The skill degrades gracefully on older systems instead of failing hard:
 
 - **Always runnable** — all Markdown knowledge and `audit.py` (Python 3.6+).
 - **Browser-free craft scripts** (`copy-lint.mjs`, `start.mjs`) — run on Node 14+.
-- **Browser-dependent craft checks** — need Node 22+ and a browser engine. They prefer **Obscura** (a portable single-binary headless browser) and fall back to Chrome/Edge/Chromium. When no engine is present, they print a MANUAL-mode message and exit code 3.
+- **Network-download scripts** (`icons.mjs fetch`, `photos.mjs search/fetch`) — run on Node 14+ via a built-in, dependency-free `fetch` polyfill.
+- **Browser-dependent craft checks** — run automated checks on Node 22+ with a browser engine (**Obscura** preferred, falling back to Chrome/Edge/Chromium). On older Node or without an engine, they **never crash**: they print a MANUAL-mode message and exit code 3, and you follow the documented manual verification path.
 
 See `docs/legacy-compatibility.md` for the full breakdown and `python3 zelvior-vibecoding-skill/scripts/compat.py` for a per-machine report.
 

@@ -19,6 +19,6 @@ All notable changes to this project are documented here. This project adheres to
 - **`compat.py`**: environment compatibility probe reporting FULL, PARTIAL, or MANUAL mode.
 - **Assets**: `robots.txt`, `llms.txt`, `security.txt`, `sitemap.xml`, `404.html`.
 - **Documentation**: `docs/architecture.md`, `docs/getting-started.md`, `docs/legacy-compatibility.md`.
-- **Brand visuals**: `images/logo.png`, `images/banner.png`, `images/architecture.png`.
 - **Community files**: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, this `CHANGELOG.md`.
 - **Broad trigger descriptions** across all 21 `SKILL.md` frontmatter fields, tuned to match how different people phrase tasks.
+- **Ancient-Node compatibility**: browser-dependent craft checks now degrade gracefully to MANUAL mode on Node < 22 (missing `WebSocket`/`fetch` globals) instead of crashing; a dependency-free `fetch` polyfill lets the network-download scripts (icons, photos) run on Node 14+.

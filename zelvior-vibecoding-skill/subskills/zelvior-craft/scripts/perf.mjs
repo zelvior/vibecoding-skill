@@ -51,7 +51,8 @@ for (let i = 0; i < args.length; i++) {
   else pos.push(args[i]);
 }
 if (!pos.length) die('usage: perf.mjs <page.html | folder | url> [--profile <dir in the OS temp folder or .zelvior-craft>] [--json file] [--w 1440 --w 390] [--runs 3] [--port 5740] [--root <dir>]');
-if (typeof WebSocket === 'undefined' || typeof fetch === 'undefined') die('Node 22 or later is needed (global WebSocket and fetch)');
+// Node 22+ global WebSocket/fetch are required for the browser check; on older
+// Node, requireChrome() above already routed to the MANUAL fallback (exit 3).
 if (!widths.length) widths.push(1440, 390);
 const target = pos[0];
 const sleep = ms => new Promise(r => setTimeout(r, ms));
