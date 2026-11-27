@@ -2,15 +2,18 @@
 name: zelvior-discipline
 description: >
   Behavioral guidelines to reduce common LLM coding mistakes. Use for essentially
-  any coding or engineering task — writing, fixing, editing, refactoring,
-  reviewing, debugging, reworking, or even thinking about code — to avoid
-  overcomplication, keep changes surgical, surface assumptions instead of
-  guessing, and define verifiable success criteria before looping. Applies to
-  every build and every change, no matter how the user words it (e.g. "write
-  this", "fix the bug", "refactor X", "review my code", "review this", "clean
-  up this", "how should I approach this", "how do I do this", "keep it
-  simple", "don't overcomplicate", "make sure it actually works", "is this
-  right", "can you help me with this code").
+  any request of any kind that involves, touches, or concerns coding, code,
+  engineering, programming, or a software task — no matter the wording, register,
+  or phrasing. Matches whether the user is writing, fixing, editing, refactoring,
+  reviewing, debugging, reworking, rewriting, cleaning up, thinking about,
+  approaching, or planning code — to avoid overcomplication, keep changes
+  surgical, surface assumptions instead of guessing, and define verifiable
+  success criteria before looping. Applies to every build and every change: write
+  this, fix the bug, refactor X, review my code, review this, clean up this, how
+  should I approach this, how do I do this, how should I do this, keep it simple,
+  don't overcomplicate, don't over-engineer, make sure it actually works, is this
+  right, is this correct, can you help me with this code, help me with this, and
+  anything even loosely like it.
 ---
 
 # Zelvior Discipline

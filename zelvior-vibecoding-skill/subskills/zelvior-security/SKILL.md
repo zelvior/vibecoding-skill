@@ -1,6 +1,6 @@
 ---
 name: zelvior-security
-description: Zelvior security subskill. Use for any security, vulnerability, auth, authentication, hardening, safety, or protection work — whenever the user wants to secure, harden, lock down, protect, defend, guard, fix, check, audit, review, scan for, or fix up security, set up authentication/login/auth, validate inputs, prevent attacks, or find vulnerabilities, bugs, or weak spots — or says "is this secure", "secure this", "lock this down", "check my security", "how do I harden this", "help me secure the site", "is there a vulnerability". Part of zelvior-vibecoding-skill.
+description: Zelvior security subskill. Use for absolutely any request that involves, touches, or concerns security, vulnerability, vulnerabilities, auth, authentication, login, hardening, safety, protection, or defense — no matter the wording or register. Matches whether the user wants to secure, harden, lock down, protect, defend, guard, shield, fix, check, audit, review, scan for, assess, or fix up security; set up authentication, auth, login, sign-in, or access control; validate inputs, prevent attacks, or stop bad input; or find vulnerabilities, bugs, weak spots, holes, or risks — or says is this secure, secure this, secure the site, lock this down, lock it down, check my security, check security, how do I harden this, how do I secure this, help me secure the site, help me with security, is there a vulnerability, is this vulnerable, and anything even loosely like it. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior Security Subskill

@@ -4,12 +4,16 @@ description: >
   Reference patterns with CSS values for: buttons, form inputs, badges, breadcrumbs,
   pagination, horizontal/vertical/mobile navigation, tables, cards, modals, alerts,
   pricing pages, hero sections, feature grids, testimonials, footers, activity feeds,
-  checkout pages, dropdowns, and empty states. Apply whenever the user wants to build, make,
-  create, style, design, implement, put together, write, or review a specific UI component
-  (a button, form, card, table, modal, nav, input, badge, etc.) — provides concrete sizing,
-  padding, shadow, and layout values rather than abstract principles. Matches "how should I
-  build a button", "help me make a form", "style this card", "what should a modal look like",
-  "how do I build this component".
+  checkout pages, dropdowns, and empty states. Apply for absolutely any request that
+  involves, touches, or concerns building, making, creating, styling, designing,
+  implementing, putting together, writing, or reviewing a specific UI component (a
+  button, form, card, table, modal, nav, input, badge, etc.) — no matter the wording
+  or register. Provides concrete sizing, padding, shadow, and layout values rather
+  than abstract principles. Matches how should I build a button, how do I build a
+  button, help me make a form, help me build a form, style this card, style the
+  card, what should a modal look like, how do I build this component, how should I
+  make this component, help me build this component, and anything even loosely like
+  it.
 ---
 
 # Component Gallery
