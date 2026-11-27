@@ -20,6 +20,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import http from 'node:http';
+import https from 'node:https';
+import zlib from 'node:zlib';
 import { spawn, spawnSync } from 'node:child_process';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -103,13 +106,123 @@ export function nodeMajor() {
   return parseInt(String(process.versions.node).split('.')[0], 10) || 0;
 }
 
+// ---------------------------------------------------------------- ancient-Node compat
+// The browser-driven checks use the global `WebSocket` (a global since Node
+// 22) and `fetch` (a global since Node 18). On older Node those globals are
+// absent, so the checks would crash with a raw "WebSocket is not defined"
+// error. requireBrowserGlobals() turns that crash into the documented MANUAL
+// fallback (exit code 3) so the skill degrades gracefully on any Node.
+export function requireBrowserGlobals(tool) {
+  const missing = [];
+  if (typeof globalThis.WebSocket === 'undefined') missing.push('WebSocket (Node 22+)');
+  if (typeof globalThis.fetch === 'undefined') missing.push('fetch (Node 18+)');
+  if (missing.length) {
+    return manual(tool, `Node ${process.versions.node || 'unknown'} lacks the global(s) the browser check needs: ${missing.join(', ')}.`);
+  }
+  return true;
+}
+
+// A minimal, dependency-free fetch for Node < 18, so the network-download
+// scripts (icons, photos) still run on ancient Node. Handles http/https
+// GET/HEAD, follows redirects, decompresses gzip/deflate/br, and returns a
+// Response-like object with text()/json()/arrayBuffer() and headers.get().
+// Also polyfills AbortController / AbortSignal.timeout when absent.
+function makeSignal(controller) {
+  const listeners = new Set();
+  const signal = {
+    aborted: controller._aborted,
+    reason: undefined,
+    addEventListener(type, fn) { if (type === 'abort' && !controller._aborted) listeners.add(fn); },
+    removeEventListener(type, fn) { listeners.delete(fn); },
+    dispatchEvent(ev) { for (const fn of listeners) fn(ev); return true; },
+  };
+  signal._fire = (reason) => { signal.aborted = true; signal.reason = reason; for (const fn of listeners) fn({ type: 'abort', reason }); listeners.clear(); };
+  return signal;
+}
+
+function minimalFetch(input, init = {}) {
+  return new Promise((resolve, reject) => {
+    let url;
+    try { url = new URL(typeof input === 'string' ? input : input.url); }
+    catch { reject(new TypeError('invalid URL: ' + input)); return; }
+    const method = (init.method || 'GET').toUpperCase();
+    const headers = Object.assign({}, init.headers || {});
+    const maxRedirects = 10;
+    const doReq = (u, redirects) => {
+      const lib = u.protocol === 'https:' ? https : http;
+      const req = lib.request(u, { method, headers, redirect: 'manual' }, (res) => {
+        const status = res.statusCode || 0;
+        if ([301, 302, 303, 307, 308].includes(status) && res.headers.location && redirects < maxRedirects) {
+          res.resume();
+          let next; try { next = new URL(res.headers.location, u); } catch { reject(new TypeError('bad redirect')); return; }
+          doReq(next, redirects + 1); return;
+        }
+        const chunks = [];
+        res.on('data', (c) => chunks.push(c));
+        res.on('end', () => {
+          let body = Buffer.concat(chunks);
+          const enc = String(res.headers['content-encoding'] || '').toLowerCase();
+          try {
+            if (enc === 'gzip') body = zlib.gunzipSync(body);
+            else if (enc === 'deflate') body = zlib.inflateSync(body);
+            else if (enc === 'br') body = zlib.brotliDecompressSync(body);
+          } catch { /* leave as-is */ }
+          const headersObj = {
+            get(k) { const v = res.headers[String(k).toLowerCase()]; return Array.isArray(v) ? v[0] : v; },
+          };
+          resolve({
+            ok: status >= 200 && status < 300,
+            status,
+            statusText: res.statusMessage || '',
+            headers: headersObj,
+            text: () => Promise.resolve(body.toString('utf8')),
+            json: () => Promise.resolve(body.toString('utf8')).then((t) => JSON.parse(t)),
+            arrayBuffer: () => Promise.resolve(body.buffer.slice(body.byteOffset, body.byteOffset + body.byteLength)),
+          });
+        });
+      });
+      const signal = init.signal;
+      if (signal && typeof signal.addEventListener === 'function') {
+        signal.addEventListener('abort', () => { try { req.destroy(); } catch { /* gone */ } }, { once: true });
+      }
+      req.on('error', reject);
+      req.end();
+    };
+    doReq(url, 0);
+  });
+}
+
+// Installs the fetch / AbortController / AbortSignal.timeout polyfills only
+// where they are missing. Safe to call on any Node version.
+export function installFetchCompat() {
+  if (typeof globalThis.fetch !== 'function') globalThis.fetch = minimalFetch;
+  if (typeof globalThis.AbortController === 'undefined') {
+    globalThis.AbortController = class AbortController {
+      constructor() { this._aborted = false; this.signal = makeSignal(this); }
+      abort(reason) { if (this._aborted) return; this._aborted = true; this.signal._fire(reason); }
+    };
+  }
+  if (typeof globalThis.AbortSignal === 'undefined') globalThis.AbortSignal = {};
+  if (typeof globalThis.AbortSignal.timeout !== 'function') {
+    globalThis.AbortSignal.timeout = (ms) => {
+      const ac = new globalThis.AbortController();
+      const t = setTimeout(() => ac.abort(new Error('aborted after ' + ms + 'ms')), ms);
+      if (t.unref) t.unref();
+      return ac.signal;
+    };
+  }
+}
+
 // Returns the Chrome path if the host can run the browser checks; otherwise
-// prints a manual-mode message and exits with code 3.
+// prints a manual-mode message and exits with code 3. The browser checks need
+// Node 14+ (ESM), the global WebSocket (Node 22+) and fetch (Node 18+), and a
+// browser engine — any missing piece routes to the MANUAL fallback.
 export function requireChrome(tool) {
   const major = nodeMajor();
   if (major < 14) {
-    return manual(tool, `Node ${process.versions.node || 'unknown'} is too old (ESM needs Node 14+; Node 18+ is needed for fetch, Node 22+ for the browser checks).`);
+    return manual(tool, `Node ${process.versions.node || 'unknown'} is too old (ESM needs Node 14+).`);
   }
+  requireBrowserGlobals(tool);
   const eng = findEngine();
   if (!eng) {
     return manual(tool, 'no Obscura, Chrome, Edge or Chromium found (set OBSCURA_PATH or CHROME_PATH to its executable).');
