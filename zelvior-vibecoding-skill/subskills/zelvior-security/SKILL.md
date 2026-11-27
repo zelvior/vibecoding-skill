@@ -1,6 +1,6 @@
 ---
 name: zelvior-security
-description: Zelvior security subskill. Use for security headers, auth, input validation, and hardening reviews. Part of zelvior-vibecoding-skill.
+description: Zelvior security subskill. Use for any security, vulnerability, auth, hardening, or safety work — whenever the user asks to secure, harden, lock down, protect, check, audit, or review security, set up authentication, validate inputs, or find vulnerabilities. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior Security Subskill

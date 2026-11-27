@@ -1,6 +1,6 @@
 ---
 name: zelvior-backend
-description: Zelvior backend subskill. Use for APIs, databases, realtime, queues, caching, and scale work. Part of zelvior-vibecoding-skill.
+description: Zelvior backend subskill. Use for any backend, API, database, realtime, queue, caching, or scale work — whenever the user asks to build, set up, wire up, create, add, or implement an API, endpoint, database, backend service, realtime feature, queue, cache, or needs to scale, optimize, or restructure backend code. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior Backend Subskill
