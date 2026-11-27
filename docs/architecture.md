@@ -2,6 +2,18 @@
 
 The Zelvior Vibecoding Mega Skill — made by **Zelvior Labs** — is a **description-driven routing system** built on SKILL.md files. There is no hidden mechanism — the agent reads each file's `description` (the trigger) plus the routing maps written in the root `SKILL.md` and router subskills, then loads only the file(s) that match the current task.
 
+```
+   Layer 1                          Layer 2                       Layer 3
+┌──────────────────────┐     ┌──────────────────────┐     ┌──────────────────────────┐
+│  description field   │     │  root SKILL.md       │     │  router subskills        │
+│  = the trigger key   │────▶│  = entry point +     │────▶│  switch one level deeper │
+│  matches the request │     │   routing map        │     │  (e.g. zelvior-ui →      │
+└──────────────────────┘     └──────────┬───────────┘     │  zelvior-ui-palettes)    │
+                                         │                 └──────────────────────────┘
+                                         ▼
+                              load ONLY the matching file(s)
+```
+
 ## Three layers
 
 ### 1. The `description` field is the trigger

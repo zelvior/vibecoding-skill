@@ -12,6 +12,20 @@ The skill is designed to run across a wide range of systems, from modern machine
 | Network-download scripts (`icons.mjs fetch`, `photos.mjs search/fetch`) | ✅ runs (Node 14+, built-in `fetch` polyfill) | ✅ runs |
 | Browser-dependent craft checks | ⚠️ **MANUAL path** (Node <22 or no engine) | ✅ runs (Node 22+, Obscura or Chrome) |
 
+```
+  Node 14+  (no browser engine)
+   ├── Markdown knowledge ................ runs
+   ├── audit.py (Python 3.6+) ............ runs
+   ├── browser-free scripts (copy-lint…) . runs
+   └── network scripts (icons/photos) .... runs   (built-in fetch polyfill)
+
+  Node 14+  +  a browser engine
+   ├── … everything above ……………………… runs
+   └── browser checks ……………………… MANUAL  (no global WebSocket on Node <22)
+
+  Node 22+  +  a browser engine  ──▶  FULL: automated browser checks run
+```
+
 ## The only hard requirement
 
 The **browser-dependent craft checks** (`gate.mjs`, `consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs shot`, `effects.mjs shot|perf`, `icons.mjs measure`, `assets/layout/check.mjs`, `assets/backgrounds/check.mjs`) run their automated check on **Node 22+** (global `WebSocket` and `fetch`) with a browser engine. They prefer **Obscura** and fall back to Chrome/Edge/Chromium.

@@ -2,6 +2,19 @@
 
 This guide walks through using the Zelvior Vibecoding Mega Skill end to end.
 
+```
+  compat.py ──▶ read SKILL.md ──▶ load the matching
+  (what can I  │   (routing map)  │   reference / subskill
+   run?)       │                  ▼
+               │         follow zelvior-discipline
+               │                  │
+               │                  ▼
+               │        run audit.py (236 tests)
+               │                  │
+               ▼                  ▼
+        craft? ──▶ finish gate (gate.mjs) or MANUAL path
+```
+
 ## 1. Check your environment
 
 The skill runs across a wide range of systems. First, see what your machine can run:
@@ -65,7 +78,7 @@ The `zelvior-craft` subskill builds client-grade pages with a real-browser finis
 - `copy-lint.mjs` — copy lint (browser-free).
 - `consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs`, `effects.mjs`, `icons.mjs` — browser-dependent checks.
 
-Browser-dependent checks prefer **Obscura** and fall back to Chrome/Edge/Chromium. If no engine is present, they print a MANUAL-mode message and exit code 3 — follow the documented manual path (screenshot at 1440/1024/768/390 px, check the checklist by eye, lint copy with `copy-lint.mjs`, record a `GATE: MANUAL <tool> <pass|open>` line).
+Browser-dependent checks run their automated check on **Node 22+** and prefer **Obscura**, falling back to Chrome/Edge/Chromium. On older Node (or with no engine) they **never crash** — they print a MANUAL-mode message and exit code 3 — follow the documented manual path (screenshot at 1440/1024/768/390 px, check the checklist by eye, lint copy with `copy-lint.mjs`, record a `GATE: MANUAL <tool> <pass|open>` line). The browser-free scripts (`start.mjs`, `copy-lint.mjs`) and the network scripts (`icons.mjs fetch`, `photos.mjs search/fetch`) run on **Node 14+**.
 
 ## 6. Follow the discipline
 

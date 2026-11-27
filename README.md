@@ -4,7 +4,7 @@
 
 ![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.6%2B-blue.svg)
-![Node](https://img.shields.io/badge/Node-22%2B-green.svg)
+![Node](https://img.shields.io/badge/Node-14%2B-green.svg)
 ![Platform](https://img.shields.io/badge/platform-web%20%26%20cli-informational)
 ![Skills](https://img.shields.io/badge/skills-21%20subskills-9b59b6)
 ![Checklists](https://img.shields.io/badge/checklists-138-7c3aed)
@@ -59,22 +59,57 @@ Find Zelvior Labs and support the project across the web:
 The skill is a **description-driven routing system**. The root `SKILL.md` is the entry point; each `description` in a SKILL.md's frontmatter is the trigger that decides when a skill loads. The agent reads the routing map, matches the task against the triggers, and loads only the matching file — never everything at once.
 
 ```
-User request
-  │
-  ▼
-Root SKILL.md loads (broad trigger: any web/coding task)
-  │
-  ▼
-Agent reads the "How to use this skill" routing map
-  │
-  ▼
-Matches the task → loads the matching reference(s) and/or subskill(s)
-  │
-  ▼
-Router subskills (e.g. zelvior-ui) switch one level deeper to focused subskills
+                           ┌──────────────────────────────┐
+                           │      User request            │
+                           └──────────────┬───────────────┘
+                                          │
+                                          ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│  Root SKILL.md   (broad trigger: any web / coding task)               │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │  "How to use this skill"  — the routing map                  │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+└──────────────────────────────┬───────────────────────────────────────┘
+                               │  match the task against the triggers
+                               ▼
+        ┌──────────────────────┼──────────────────────┬───────────────────────┐
+        ▼                      ▼                      ▼                       ▼
+┌─────────────────┐   ┌──────────────────┐   ┌────────────────┐    ┌───────────────────┐
+│  references/    │   │  zelvior-craft   │   │  zelvior-ui    │    │  zelvior-lean     │
+│  12 guides +    │   │  (pages: land-   │   │  (style router)│    │  (smallest change)│
+│  138 checklists │   │  ing / product /│   │  ▶ palettes    │    │  ▶ review / audit │
+│                 │   │   game)         │   │  ▶ fonts       │    │    / debt / gain  │
+│  ▶ design      │   │  ▶ layout,      │   │  ▶ components  │    └───────────────────┘
+│  ▶ backend     │   │    motion,      │   │  ▶ a11y        │
+│  ▶ security    │   │    icons, copy  │   └────────────────┘
+│  ▶ perf / seo  │   │  ▶ finish gate  │
+└─────────────────┘   └──────────────────┘
+        │                                    │
+        ▼                                    ▼
+   run audit.py                         real-browser checks
+   (236 tests)                         (or MANUAL fallback)
 ```
 
 ## What is inside
+
+```
+                         Zelvior Vibecoding Mega Skill
+                         (made by Zelvior Labs)
+                                  │
+        ┌─────────────────────────┼─────────────────────────┐
+        ▼                       ▼                         ▼
+┌─────────────────┐   ┌──────────────────┐      ┌──────────────────┐
+│   SKILL.md      │   │  references/     │      │  subskills/      │
+│  root + routing │   │  12 guides       │      │  21 focused     │
+│     map         │   │  + 138 checklists│      │  skills          │
+└────────┬────────┘   └────────┬─────────┘      └────────┬─────────┘
+         │                     │                         │
+         ▼                     ▼                         ▼
+   routing map            design / backend /        zelvior-craft
+   (load only what       seo / security /         zelvior-lean
+    you need)            perf / a11y / audit       zelvior-ui
+                                                zelvior-discipline
+```
 
 ### The mega skill
 
