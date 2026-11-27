@@ -2,8 +2,9 @@
 name: zelvior-lean-debt
 description: >
   List every `shortcut:` comment (and older `zelvior-lean:` ones) as a debt ledger. One-shot report,
-  changes nothing. Use for "zelvior-lean debt", "what did zelvior-lean defer", "list the
-  shortcuts", /zelvior-lean-debt.
+  changes nothing. Use for "zelvior-lean debt", "what did zelvior-lean defer", "what did zelvior-lean
+  skip", "list the shortcuts", "show the debt", "what's the debt", "show me the deferred stuff",
+  /zelvior-lean-debt.
 ---
 
 Every deliberate zelvior-lean shortcut is marked with a `shortcut:` comment naming

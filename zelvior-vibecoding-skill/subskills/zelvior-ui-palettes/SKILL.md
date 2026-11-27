@@ -3,10 +3,12 @@ name: zelvior-ui-palettes
 description: >
   12 ready-to-use color palettes with exact hex and HSL values in a 50-900 shade scale.
   Covers primary, neutral, and supporting colors (cyan, blue, purple, teal, red, green, pink,
-  indigo, warm grey, cool grey, blue grey). Apply whenever the user asks to pick, choose, decide,
-  or set up colors, pick a palette or color scheme, define CSS custom properties or Tailwind
-  theme colors, choose background/text/border/accent colors, set up a design system color scale,
-  or needs semantic colors for error/warning/success states.
+  indigo, warm grey, cool grey, blue grey). Apply whenever the user wants to pick, choose, decide,
+  select, figure out, or set up colors, a color, a palette, a color scheme, a color scale, or a
+  theme, define CSS custom properties or Tailwind theme colors, choose background, text, border,
+  or accent colors, set up a design system color scale, or needs semantic colors for error,
+  warning, or success states — e.g. "what color should I use", "pick a palette", "help me choose
+  colors", "how do I set up the theme colors", "what's a good color scheme".
 ---
 
 # Color Palettes

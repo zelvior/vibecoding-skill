@@ -3,7 +3,8 @@ name: zelvior-lean-gain
 description: >
   Show zelvior-lean's measured savings (code, cost, speed) from the benchmark.
   One-shot display. Use for /zelvior-lean-gain, "what does zelvior-lean save",
-  "zelvior-lean impact".
+  "zelvior-lean impact", "what does zelvior-lean gain", "how much does zelvior-lean
+  save", "show the savings", "zelvior-lean results".
 ---
 
 # Zelvior-Lean Gain

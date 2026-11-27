@@ -4,10 +4,13 @@ description: >
   Quality audit of a whole repo: bugs, security holes, what breaks under real
   load, risky code without tests, slow paths, and what to delete, merge or
   split. Ranked, each finding explained in plain English. One-shot report,
-  changes nothing. Use for "audit this codebase", "review the whole repo",
-  "scan the repo", "check the project", "look over everything", "find bloat",
-  "find issues", "what's wrong with this", "what can I delete", "clean up
-  this codebase", /zelvior-lean-audit.
+  changes nothing. Use for "audit this codebase", "audit the repo", "review the
+  whole repo", "review the project", "scan the repo", "scan the codebase",
+  "check the project", "check the whole repo", "look over everything", "go over
+  the codebase", "find bloat", "find issues", "find problems", "what's wrong
+  with this", "what's broken", "what can I delete", "what can I clean up",
+  "clean up this codebase", "clean up the repo", "how bad is this code",
+  /zelvior-lean-audit.
 ---
 
 Audit the whole repo like the senior developer who just inherited it and
