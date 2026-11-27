@@ -14,6 +14,8 @@
 
 The skill works with any coding agent that reads `SKILL.md` files (Claude Skills and compatible agents). Point it at a task and it routes itself to only the knowledge it needs — never dumping everything at once.
 
+> **Tagline:** *Senior-level web builds, machine-audited — one skill, zero slop.*
+
 ## Why this exists
 
 Most "vibe coding" produces slop: pretty pages that fail accessibility, slow Core Web Vitals, missing security headers, and copy that reads like a template. This skill is the antidote — a single routing system that loads the right senior-level checklist for the job and verifies the result against a strict audit.
@@ -50,6 +52,7 @@ Find Zelvior Labs and support the project across the web:
 - [Connect with Zelvior Labs](#connect-with-zelvior-labs)
 - [Quick start](#quick-start)
 - [Legacy compatibility](#legacy-compatibility)
+- [Showcase](#showcase)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
@@ -211,6 +214,22 @@ The skill degrades gracefully on older systems instead of failing hard:
 - **Browser-dependent craft checks** — run automated checks on Node 22+ with a browser engine (**Obscura** preferred, falling back to Chrome/Edge/Chromium). On older Node or without an engine, they **never crash**: they print a MANUAL-mode message and exit code 3, and you follow the documented manual verification path.
 
 See `docs/legacy-compatibility.md` for the full breakdown and `python3 zelvior-vibecoding-skill/scripts/compat.py` for a per-machine report.
+
+## Showcase
+
+Five live sites and web apps, each built with the skill and deployed to GitHub Pages. Open any link to verify the skill's capabilities in a real browser — every site is production-style, accessible, responsive, and audit-passing.
+
+**Showcase hub:** [https://zelvior.github.io/vibecoding-skill/](https://zelvior.github.io/vibecoding-skill/)
+
+| Site | What it demonstrates | Link |
+|------|----------------------|------|
+| 🌌 **Aurora — Product Landing** | Anti-slop craft, CRO, design, pricing | [Live](https://zelvior.github.io/vibecoding-skill/showcase/aurora/) |
+| 📊 **Pulse — Analytics Dashboard** | UI styling, components, data, accessibility | [Live](https://zelvior.github.io/vibecoding-skill/showcase/pulse/) |
+| 🎨 **Muse — Design Studio** | Design system, typography, brand, a11y | [Live](https://zelvior.github.io/vibecoding-skill/showcase/muse/) |
+| ✍️ **Quill — Knowledge Blog** | SEO, content, performance, llms.txt | [Live](https://zelvior.github.io/vibecoding-skill/showcase/quill/) |
+| 🛠️ **Forge — Interactive Game** | Interactive canvas, motion, effects | [Live](https://zelvior.github.io/vibecoding-skill/showcase/forge/) |
+
+Each showcase is plain static HTML/CSS/JS — no build step, no dependencies — so you can read the source and see the skill's principles applied directly. The local copies live under `docs/showcase/` in this repository.
 
 ## Documentation
 

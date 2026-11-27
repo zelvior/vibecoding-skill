@@ -37,6 +37,16 @@ python3 zelvior-vibecoding-skill/scripts/audit.py https://example.com
 - GitHub organization: https://github.com/Zelvior-Labs
 - GitHub user: https://github.com/zelvior
 
+## Showcase
+
+Five live sites built with the skill, deployed to GitHub Pages:
+- Showcase hub: https://zelvior.github.io/vibecoding-skill/
+- Aurora (product landing): https://zelvior.github.io/vibecoding-skill/showcase/aurora/
+- Pulse (analytics dashboard): https://zelvior.github.io/vibecoding-skill/showcase/pulse/
+- Muse (design studio): https://zelvior.github.io/vibecoding-skill/showcase/muse/
+- Quill (knowledge blog): https://zelvior.github.io/vibecoding-skill/showcase/quill/
+- Forge (interactive game): https://zelvior.github.io/vibecoding-skill/showcase/forge/
+
 ## Key links
 
 - [README](README.md): overview, full contents, and quick start.
