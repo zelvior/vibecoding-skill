@@ -2,9 +2,45 @@
 
 ![Zelvior](images/logo.png)
 
+![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.6%2B-blue.svg)
+![Node](https://img.shields.io/badge/Node-22%2B-green.svg)
+![Platform](https://img.shields.io/badge/platform-web%20%26%20cli-informational)
+![Skills](https://img.shields.io/badge/skills-21%20subskills-9b59b6)
+![Checklists](https://img.shields.io/badge/checklists-138-7c3aed)
+![Audit](https://img.shields.io/badge/audit-236%20tests-e8590c)
+
 ![Banner](images/banner.png)
 
-A senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. It merges design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, a 236-test audit across 32 modules, 138 page/screen/design-system/flow checklists, an anti-slop frontend craft skill, a lean minimal-change coding mode, a UI styling knowledge set, and behavioral coding guidelines — into one routing system.
+**A senior-level mega skill for building production websites and apps that pass a strict, opinionated audit.** It merges design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, a 236-test audit across 32 modules, 138 page/screen/design-system/flow checklists, an anti-slop frontend craft skill, a lean minimal-change coding mode, a UI styling knowledge set, and behavioral coding guidelines — into one description-driven routing system.
+
+The skill works with any coding agent that reads `SKILL.md` files (Claude Skills and compatible agents). Point it at a task and it routes itself to only the knowledge it needs — never dumping everything at once.
+
+## Why this exists
+
+Most "vibe coding" produces slop: pretty pages that fail accessibility, slow Core Web Vitals, missing security headers, and copy that reads like a template. This skill is the antidote — a single routing system that loads the right senior-level checklist for the job and verifies the result against a strict audit.
+
+**What you get, at a glance:**
+
+| | |
+|---|---|
+| 🧭 **Routing mega skill** | One `SKILL.md` entry point; trigger-driven, loads only what's needed |
+| 📚 **12 deep-dive guides** | Design, backend, frontend, SEO, security, performance, a11y, CRO, DevOps, audit, AI search |
+| ✅ **138 checklists** | Every page, screen, flow, and design-system component — as required tests |
+| 🔍 **236-test audit** | Local `audit.py` + a full manual checklist across 32 modules |
+| 🎨 **Anti-slop craft skill** | Real-browser finish gate for client-grade landing/product/game pages |
+| 🪶 **Lean coding mode** | Smallest change that fully solves the task |
+| 🎯 **Behavioral discipline** | Four principles that govern how every change is made |
+
+## Table of contents
+
+- [How it works](#how-it-works)
+- [What is inside](#what-is-inside)
+- [Quick start](#quick-start)
+- [Legacy compatibility](#legacy-compatibility)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## How it works
 
@@ -130,12 +166,16 @@ The skill degrades gracefully on older systems instead of failing hard:
 
 See `docs/legacy-compatibility.md` for the full breakdown and `python3 zelvior-vibecoding-skill/scripts/compat.py` for a per-machine report.
 
-## Documentation index
+## Documentation
 
 - [Architecture](docs/architecture.md) — how the routing system and skill structure work.
 - [Getting started](docs/getting-started.md) — the end-to-end workflow.
 - [Legacy compatibility](docs/legacy-compatibility.md) — OS support and the MANUAL fallback.
 
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). This project follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
+[GPL-3.0](LICENSE). See [LICENSE](LICENSE).
