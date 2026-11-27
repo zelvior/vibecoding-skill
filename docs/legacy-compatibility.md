@@ -9,23 +9,26 @@ The skill is designed to run across a wide range of systems, from modern machine
 | All Markdown knowledge (SKILL.md, references, subskills) | ✅ runs | ✅ runs |
 | `scripts/audit.py` (Python 3.6+, stdlib-only) | ✅ runs (Python ≤3.8 on Win7) | ✅ runs |
 | Browser-free craft scripts (`copy-lint.mjs`, `start.mjs`) | ✅ runs (Node 14+) | ✅ runs |
-| Browser-dependent craft checks | ⚠️ **MANUAL path** | ✅ runs (Obscura or Chrome) |
+| Network-download scripts (`icons.mjs fetch`, `photos.mjs search/fetch`) | ✅ runs (Node 14+, built-in `fetch` polyfill) | ✅ runs |
+| Browser-dependent craft checks | ⚠️ **MANUAL path** (Node <22 or no engine) | ✅ runs (Node 22+, Obscura or Chrome) |
 
 ## The only hard requirement
 
-The **browser-dependent craft checks** (`gate.mjs`, `consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs shot`, `effects.mjs shot|perf`, `icons.mjs measure`, `assets/layout/check.mjs`, `assets/backgrounds/check.mjs`) need Node 22+ and a browser engine. They prefer **Obscura** and fall back to Chrome/Edge/Chromium.
+The **browser-dependent craft checks** (`gate.mjs`, `consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs shot`, `effects.mjs shot|perf`, `icons.mjs measure`, `assets/layout/check.mjs`, `assets/backgrounds/check.mjs`) run their automated check on **Node 22+** (global `WebSocket` and `fetch`) with a browser engine. They prefer **Obscura** and fall back to Chrome/Edge/Chromium.
 
-This is a hard OS limitation, not a skill limitation:
+On Node < 22 (missing `WebSocket`/`fetch` globals) or on hosts without a browser engine, they **do not crash** — they print a MANUAL-mode message and exit with code 3, and you follow the documented manual path below. The automated-check requirement is a soft floor, not a hard failure.
+
+This is a hard OS limitation for the automated check, not a skill limitation:
 
 - **Node 22+ prebuilts** require Windows 10+, macOS 13.5+, and Linux with glibc 2.28+.
 - **Obscura** requires x86_64 (no 32-bit build) and, on Linux, glibc 2.35+ (Ubuntu 22.04+).
 - **Chrome 110+** dropped Windows 7/8/8.1.
 
-So on genuinely old systems (Windows 7 32-bit, very old Linux or macOS), no browser engine runs — and the browser-dependent checks use the MANUAL path. Everything else still runs.
+So on genuinely old systems (Windows 7 32-bit, very old Linux or macOS), no browser engine runs — and the browser-dependent checks use the MANUAL path. Everything else, including the network-download scripts (via the `fetch` polyfill), still runs.
 
 ## The MANUAL fallback
 
-When no browser engine is present, the browser-dependent scripts do **not** crash. They print a MANUAL-mode message and exit with code 3. Follow the documented manual verification path:
+When no browser engine is present, or Node is older than 22 (no global `WebSocket`/`fetch`), the browser-dependent scripts do **not** crash. They print a MANUAL-mode message and exit with code 3. Follow the documented manual verification path:
 
 1. Open the built page in any browser and screenshot it at **1440, 1024, 768, and 390 px**.
 2. Check every item in the craft checklist (the craft `SKILL.md` "Checklist") by eye.
@@ -50,14 +53,15 @@ The compatibility probe checks Python, Node.js, and the browser engine (Obscura 
 
 - Set `CHROME_PATH` to the browser executable, or leave it to be detected from the usual install locations.
 
-## Browser-free craft scripts
+## Browser-free and network-only craft scripts
 
 These need no browser and run on Node 14+, so they work on older systems that still have a usable Node:
 
 - `copy-lint.mjs` — copy lint.
 - `start.mjs` — deal / css / brand.
 - Browser-free subcommands of `effects.mjs` (`list`, `index`, `pick`, `gallery`, `publish`, `serve`), `moments.mjs` (`check`, `list`), and `icons.mjs` (`fetch`, `scan`).
+- Network-download scripts — `icons.mjs fetch` and `photos.mjs search`/`fetch` — run on Node 14+ through a built-in, dependency-free `fetch` polyfill (no browser, no npm packages).
 
 ## Summary
 
-The skill is fully usable on ancient legacy devices. The automated headless-browser verification is the only part that needs a modern OS — and even that has a documented, reliable MANUAL fallback. Run `compat.py` on any machine to see exactly which mode it is in.
+The skill is fully usable on ancient legacy devices. The automated headless-browser verification is the only part that benefits from a modern OS (Node 22+ + a browser engine) — and even that degrades to a documented, reliable MANUAL fallback instead of crashing. Everything else, including the network downloads, runs on Node 14+. Run `compat.py` on any machine to see exactly which mode it is in.

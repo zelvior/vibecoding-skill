@@ -56,7 +56,12 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { requireChrome, launchBrowser } from './_legacy.mjs';
+import { requireChrome, launchBrowser, installFetchCompat } from './_legacy.mjs';
+
+// Installs a dependency-free fetch on Node < 18 so the icon `fetch` subcommand
+// (jsDelivr downloads) works on ancient Node. The `measure` subcommand still
+// degrades to MANUAL on Node < 22 via requireChrome's WebSocket check.
+installFetchCompat();
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const INDEX = path.resolve(HERE, '..', 'assets', 'icons', 'index.json');
