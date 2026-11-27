@@ -1,10 +1,13 @@
 ---
 name: zelvior-discipline
 description: >
-  Behavioral guidelines to reduce common LLM coding mistakes. Use when writing,
-  reviewing, or refactoring code to avoid overcomplication, make surgical
-  changes, surface assumptions, and define verifiable success criteria.
-  Applies to every build and every change.
+  Behavioral guidelines to reduce common LLM coding mistakes. Use whenever you
+  write, fix, edit, refactor, review, or think about code — to avoid
+  overcomplication, keep changes surgical, surface assumptions instead of
+  guessing, and define verifiable success criteria before looping. Applies to
+  every build and every change, however the user words the task (e.g. "write
+  this", "fix the bug", "refactor X", "review my code", "how should I approach
+  this", "keep it simple", "make sure it actually works").
 ---
 
 # Zelvior Discipline

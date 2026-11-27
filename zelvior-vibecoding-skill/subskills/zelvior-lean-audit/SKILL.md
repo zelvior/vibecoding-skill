@@ -5,7 +5,9 @@ description: >
   load, risky code without tests, slow paths, and what to delete, merge or
   split. Ranked, each finding explained in plain English. One-shot report,
   changes nothing. Use for "audit this codebase", "review the whole repo",
-  "find bloat", "what can I delete", /zelvior-lean-audit.
+  "scan the repo", "check the project", "look over everything", "find bloat",
+  "find issues", "what's wrong with this", "what can I delete", "clean up
+  this codebase", /zelvior-lean-audit.
 ---
 
 Audit the whole repo like the senior developer who just inherited it and

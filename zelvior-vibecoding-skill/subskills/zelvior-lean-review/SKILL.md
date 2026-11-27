@@ -5,7 +5,9 @@ description: >
   under real load, is risky code tested, is it fast enough, and is every line
   needed. Reads the connected code, not only the diff. Each finding is
   explained in plain English. Use for "review this", "code review", "review
-  the last commit", "review my PR", "is this over-engineered", /zelvior-lean-review.
+  the last commit", "review my PR", "look over my code", "check this change",
+  "is this safe", "vet this", "sanity check this", "will this break", "is
+  this over-engineered", "is this too much", /zelvior-lean-review.
 ---
 
 Review a change like the senior developer who will be paged when it breaks.

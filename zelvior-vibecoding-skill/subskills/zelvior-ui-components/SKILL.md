@@ -4,9 +4,10 @@ description: >
   Reference patterns with CSS values for: buttons, form inputs, badges, breadcrumbs,
   pagination, horizontal/vertical/mobile navigation, tables, cards, modals, alerts,
   pricing pages, hero sections, feature grids, testimonials, footers, activity feeds,
-  checkout pages, dropdowns, and empty states. Apply whenever implementing, styling, or
-  reviewing a specific UI component — provides concrete sizing, padding, shadow, and
-  layout values rather than abstract principles.
+  checkout pages, dropdowns, and empty states. Apply whenever the user asks to build, make,
+  style, design, implement, or review a specific UI component (a button, form, card, table,
+  modal, nav, etc.) — provides concrete sizing, padding, shadow, and layout values rather
+  than abstract principles.
 ---
 
 # Component Gallery

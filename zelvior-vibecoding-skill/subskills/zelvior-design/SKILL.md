@@ -1,6 +1,6 @@
 ---
 name: zelvior-design
-description: Zelvior design system subskill. Use for UI/UX, visual design, components, motion, and brand work. Covers must-have patterns and banned anti-patterns. Part of zelvior-vibecoding-skill.
+description: Zelvior design system subskill. Use for any UI/UX, visual design, look-and-feel, styling, component, motion, or brand work — whenever the user asks to design, style, lay out, structure, or polish a UI, set up a design system, build or review components, add motion, or define brand visuals. Covers must-have patterns and banned anti-patterns. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior Design Subskill

@@ -4,8 +4,10 @@ description: >
   WCAG 2.2 accessibility guidelines with actionable implementation rules for web developers.
   Covers contrast ratios, keyboard navigation, focus management, ARIA, screen readers, alt text,
   touch targets, form validation, color blindness, reduced motion, semantic HTML, and landmarks.
-  Apply whenever writing HTML/CSS/JS, building forms, handling focus, choosing colors for
-  accessibility, implementing interactive components, or reviewing code for a11y compliance.
+  Apply whenever the user asks to make something accessible, fix a11y, check WCAG, handle
+  screen readers, keyboard navigation, or focus, build forms or interactive components
+  accessibly, choose colors for accessibility, or review code for a11y compliance — including
+  when writing HTML/CSS/JS, handling focus, or implementing interactive components.
   Includes all Level A + AA criteria and new 2.2 additions (focus not obscured, dragging
   alternatives, target size minimum, redundant entry, accessible authentication, consistent help).
 ---

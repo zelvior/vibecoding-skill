@@ -1,6 +1,6 @@
 ---
 name: zelvior-devops
-description: Zelvior DevOps subskill. Use for CI/CD, Docker, Kubernetes, Terraform, deploys, and SRE work. Part of zelvior-vibecoding-skill.
+description: Zelvior DevOps subskill. Use for any CI/CD, deploy, release, Docker, container, Kubernetes, k8s, Terraform, infrastructure, hosting, or SRE work — whenever the user asks to set up, build, configure, deploy, ship, host, containerize, or manage infrastructure, CI/CD, or production operations. Part of zelvior-vibecoding-skill.
 ---
 
 # Zelvior DevOps Subskill
