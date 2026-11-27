@@ -2,6 +2,29 @@
 
 All notable changes to this project are documented here. This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-11-27
+
+### Changed
+
+- **Removed brand images** — deleted the `images/` folder (logo, banner,
+  architecture diagram) and stripped all image references from the README,
+  docs, and CHANGELOG.
+- **Zelvior Labs attribution** — the project is now explicitly presented as
+  made by **Zelvior Labs** across the README, docs, and llms.txt.
+
+### Fixed
+
+- **Ancient-Node support** — browser-dependent craft checks no longer crash on
+  Node < 22. They degrade gracefully to the documented MANUAL mode (exit code
+  3) when the global `WebSocket`/`fetch` are missing. A dependency-free `fetch`
+  polyfill lets the network-download scripts (icons, photos) run on Node 14+.
+
+### Added
+
+- **`SECURITY.md`** — GitHub-recognized security policy.
+- **`.github/FUNDING.yml`** — enables the Sponsor button.
+- **GitHub issue templates** — bug report and feature request.
+
 ## [1.0.0] - 2026-11-27
 
 ### Added
