@@ -56,6 +56,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { requireChrome, launchBrowser } from './_legacy.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const INDEX = path.resolve(HERE, '..', 'assets', 'icons', 'index.json');
@@ -490,8 +491,8 @@ async function checkCmd() {
    resolved: the path-point reader above gives up on those). The boxes go into index.json "boxes" keyed by icon id, and
    fetch crops to them. Needs a Chrome (CHROME_PATH or the usual places); run it when the curated list changes. */
 async function measureCmd() {
+  requireChrome('icons');
   noCrop = true;
-  const { spawn, execFileSync } = await import('node:child_process');
   const idx = loadIndex();
   // default Chrome profile folder: --profile, else $ZELVIOR_CRAFT_TMP/chrome/<tool>-<pid>, else a fresh folder under the system temp dir
   const defaultProfile = () => process.env.ZELVIOR_CRAFT_TMP ? path.join(process.env.ZELVIOR_CRAFT_TMP, 'chrome', 'icons-' + process.pid) : path.join(os.tmpdir(), 'zelvior-craft-icons-' + process.pid);
@@ -506,8 +507,6 @@ async function measureCmd() {
     return to;
   };
   const profile = opt('profile') ? inProject(opt('profile'), 'icons') : path.resolve(defaultProfile());
-  const chromePath = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p => p && fs.existsSync(p));
-  if (!chromePath) { console.error('icons: no Chrome found (set CHROME_PATH)'); process.exit(1); }
   const seen = new Set(), items = [];
   for (const a of [...idx.apps, ...idx.files]) {
     if (seen.has(a.icon)) continue;
@@ -518,13 +517,8 @@ async function measureCmd() {
     items.push({ key: a.icon, svg: r.svg.replace(/viewBox="[^"]+"/, `viewBox="${vb}"`), vb: vb.split(/\s+/).map(Number), x, y });
   }
   fs.rmSync(profile, { recursive: true, force: true });
-  fs.mkdirSync(profile, { recursive: true });
-  const child = spawn(chromePath, ['--headless=new', `--user-data-dir=${profile}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check', '--disable-extensions', '--mute-audio', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', 'about:blank'], { stdio: 'ignore' });
-  const killChrome = () => { try { if (process.platform === 'win32') execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); else child.kill('SIGKILL'); } catch {} };
+  const { port, cleanup } = await launchBrowser({ tool: 'icons', profile, windowSize: '400,400' });
   try {
-    let port = 0;
-    for (let i = 0; i < 100 && !port; i++) { await new Promise(r => setTimeout(r, 150)); try { port = +fs.readFileSync(path.join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0]; } catch {} }
-    if (!port) throw new Error('Chrome did not start');
     let target;
     for (let i = 0; i < 50 && !target; i++) { try { target = (await (await fetch(`http://127.0.0.1:${port}/json/list`)).json()).find(t => t.type === 'page'); } catch {} if (!target) await new Promise(r => setTimeout(r, 150)); }
     if (!target) throw new Error('no page target');
@@ -553,7 +547,7 @@ async function measureCmd() {
     idx.boxes = o;
     fs.writeFileSync(INDEX, JSON.stringify(idx, null, 1));
     console.log(`measured ${n} of ${items.length} colour marks (${hidden} skipped as implausible), written to index.json boxes`);
-  } finally { killChrome(); }
+  } finally { await cleanup(); }
 }
 
 /* ------------------------------------------------------------ scan: every icon a page names, fetched at once

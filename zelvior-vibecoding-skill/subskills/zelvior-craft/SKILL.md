@@ -376,6 +376,49 @@ Each line names its checks: `consistency.mjs` ids in brackets, `check.mjs` findi
 - Deleting or editing the kit's own files (`assets/`, `scripts/`) to clear a check: a check that
   flags a kit file is reported, and the page is checked again after any change.
 
+## Legacy compatibility and requirements
+
+The craft scripts split into browser-free and browser-dependent parts, so the
+skill degrades gracefully on older systems instead of failing hard.
+
+**Browser-free (Node 14+):** `copy-lint.mjs` (copy lint), `start.mjs`
+(deal / css / brand), and the browser-free subcommands of `effects.mjs`
+(`list`, `index`, `pick`, `gallery`, `publish`, `serve`), `moments.mjs`
+(`check`, `list`), and `icons.mjs` (`fetch`, `scan`). These need no browser
+and run on any system with Node 14+.
+
+**Browser-dependent (Node 22+ + a browser engine):** `gate.mjs`,
+`consistency.mjs`, `shoot.mjs`, `perf.mjs`, `moments.mjs shot`,
+`effects.mjs shot|perf`, `icons.mjs measure`, `assets/layout/check.mjs`, and
+`assets/backgrounds/check.mjs`. They prefer **Obscura** (a portable
+single-binary headless browser, ~70 MB, CDP-compatible) and fall back to
+Chrome, Edge, or Chromium. The shared launcher in `scripts/_legacy.mjs`
+detects the engine, launches it with the right flags, and waits for its CDP
+port to be ready.
+
+**When no browser engine is present:** the browser-dependent scripts do not
+crash. They print a MANUAL-mode message and exit with code 3. Follow the
+manual verification path: open the built page in any browser, screenshot it
+at 1440, 1024, 768 and 390 px, check every item in the Checklist (section 5)
+by eye, lint the copy with `copy-lint.mjs` (no browser needed), and record the
+result as a GATE line: `GATE: MANUAL <tool> <pass|open>`.
+
+**Check your environment:** run `python3 ../scripts/compat.py` (from the
+craft folder) or `python3 scripts/compat.py` from the repo root. It probes
+Python, Node.js, and the browser engine and reports FULL, PARTIAL, or MANUAL
+mode.
+
+**Browser engine requirements:** the browser-dependent checks need a modern
+OS. Node 22+ prebuilts require Windows 10+, macOS 13.5+, and Linux with
+glibc 2.28+. Obscura additionally requires x86_64 (no 32-bit build) and, on
+Linux, glibc 2.35+ (Ubuntu 22.04+). Chrome 110+ dropped Windows 7/8/8.1.
+On genuinely old systems (Windows 7 32-bit, very old Linux or macOS), the
+browser-dependent checks use the MANUAL path; everything else still runs.
+
+To install Obscura, download the release archive and put the `obscura` binary
+on `PATH` or set `OBSCURA_PATH`. To use Chrome/Edge/Chromium instead, set
+`CHROME_PATH` to its executable.
+
 ## References
 
 All in `references/`; section 3 names the one each asset needs.

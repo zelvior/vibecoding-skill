@@ -24,8 +24,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import http from 'node:http';
-import { spawn, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { requireChrome, launchBrowser } from '../../scripts/_legacy.mjs';
+
+requireChrome('layout-check');
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -46,9 +48,6 @@ const inProject = (p, name) => {
 const sizes = String(opt('sizes', '1440x900,1024x768,820x1180,768x1024,390x844')).split(',').map(s => s.split('x').map(Number));
 if (!target || target === true || rootArg === true) { console.error('usage: check.mjs --url <url or file> [--profile <dir in the OS temp folder or .zelvior-craft>] [--sizes 1440x900,1024x768,820x1180,768x1024,390x844] [--shots dir] [--root dir] [--json]'); process.exit(2); }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const chrome = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].find(p => p && fs.existsSync(p));
-if (!chrome) { console.error('no Chrome found (set CHROME_PATH)'); process.exit(2); }
 const src = fs.readFileSync(path.join(here, 'layout-check.js'), 'utf8');
 // a page file is served from its folder (or --root) over http on 127.0.0.1 (5770-5779), never opened from file://
 let url = target, server = null;
@@ -106,22 +105,13 @@ const STRESS = String.raw`(async (maxChars) => {
 })`;
 
 const profile = inProject(profileArg, 'layout-check');
-fs.mkdirSync(profile, { recursive: true });
-const portFile = path.join(profile, 'DevToolsActivePort');
-try { fs.rmSync(portFile); } catch { /* none */ }
 const [w0, h0] = sizes[0];
-const child = spawn(chrome, ['--headless=new', `--user-data-dir=${profile}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check',
-  '--disable-extensions', '--hide-scrollbars', '--mute-audio', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
-  `--window-size=${w0},${h0}`, 'about:blank'], { stdio: 'ignore', windowsHide: true });
-const kill = () => { if (child.exitCode != null) return; try { execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); } catch { try { child.kill(); } catch { /* gone */ } } };
+const { port, kill, cleanup } = await launchBrowser({ tool: 'layout-check', profile, windowSize: `${w0},${h0}` });
 const guard = setTimeout(() => { console.error('check: timed out'); kill(); process.exit(2); }, 240000);
 
 let failed = false;
 const report = [];
 try {
-  let port = null;
-  for (let i = 0; i < 150 && !port; i++) { await sleep(100); try { port = parseInt(fs.readFileSync(portFile, 'utf8'), 10) || null; } catch { /* not yet */ } }
-  if (!port) throw new Error('Chrome did not start');
   const ver = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
   const ws = new WebSocket(ver.webSocketDebuggerUrl);
   await new Promise((r, j) => { ws.addEventListener('open', r, { once: true }); ws.addEventListener('error', j, { once: true }); });
@@ -180,7 +170,7 @@ try {
   failed = true;
 } finally {
   clearTimeout(guard);
-  kill();
+  await cleanup();
   server?.close();
 }
 

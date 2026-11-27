@@ -92,6 +92,9 @@ import os from 'node:os';
 import crypto from 'node:crypto';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { requireChrome } from './_legacy.mjs';
+
+requireChrome('gate');
 
 const SELF = fileURLToPath(import.meta.url);
 const here = path.dirname(SELF);
