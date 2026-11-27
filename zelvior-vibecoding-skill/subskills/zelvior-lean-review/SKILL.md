@@ -4,8 +4,19 @@ description: >
   Quality review of a change: is the logic right, is it safe, does it hold
   under real load, is risky code tested, is it fast enough, and is every line
   needed. Reads the connected code, not only the diff. Each finding is
-  explained in plain English. Use for "review this", "code review", "review
-  the last commit", "review my PR", "is this over-engineered", /zelvior-lean-review.
+  explained in plain English. Use for absolutely any request that involves
+  reviewing, checking, vetting, or sanity-checking a change, diff, commit, PR, or
+  piece of code — no matter the wording or register. Matches whether the user
+  wants to review this, review this change, review the change, code review,
+  review the code, review my code, review the code, review the last commit,
+  review my commit, review my PR, review my PR, review my change, review my
+  change, look over my code, look at this, look at this change, check this
+  change, check this code, check my work, check this, vet this, vet the change,
+  sanity check this, sanity check the change, sanity check the code, will this
+  break, will this hold up, will this work, is this safe, is this right, is this
+  correct, is this good, is this okay, is this over-engineered, is this too much,
+  is this too complex, does this work, and anything even loosely like it, plus
+  /zelvior-lean-review.
 ---
 
 Review a change like the senior developer who will be paged when it breaks.

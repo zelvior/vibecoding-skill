@@ -277,13 +277,15 @@
 // the crops go to --out, else to .zelvior-craft/consistency beside the page file (.zelvior-craft/consistency-<name> for a page
 // not named index.html, so two pages in one folder keep their own), or to a temp folder for a URL: never into the current
 // directory.
-import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, rmSync, writeFileSync, statSync, createReadStream, readdirSync, unlinkSync, readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname, basename, extname, relative, sep, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { inflateSync } from 'node:zlib';
+import { requireChrome, launchBrowser } from './_legacy.mjs';
+
+requireChrome('consistency');
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const argv = process.argv.slice(2);
@@ -4596,65 +4598,19 @@ else {
 mkdirSync(outDir, { recursive: true });
 for (const f of readdirSync(outDir)) if (/^(sweep-)?\d{3,4}-.+\.jpg$/.test(f)) unlinkSync(join(outDir, f));
 
-// ---------------------------------------------------------------- our own Chrome: own profile, stopped by its own PID
-function findChrome() {
-  const env = process.env.CHROME_PATH;
-  if (env && existsSync(env)) return env;
-  const local = process.env.LOCALAPPDATA || '', pf = process.env.PROGRAMFILES || 'C:\\Program Files', pf86 = process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)';
-  const home = process.env.HOME || process.env.USERPROFILE || '';
-  const list = [
-    join(pf, 'Google/Chrome/Application/chrome.exe'), join(pf86, 'Google/Chrome/Application/chrome.exe'), join(local, 'Google/Chrome/Application/chrome.exe'),
-    join(pf86, 'Microsoft/Edge/Application/msedge.exe'), join(pf, 'Microsoft/Edge/Application/msedge.exe'),
-    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium',
-    join(home, 'Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),
-    '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/snap/bin/chromium',
-  ];
-  return list.find((c) => c && existsSync(c)) || null;
-}
+// ---------------------------------------------------------------- our own browser engine (Obscura or Chrome): own profile, stopped by its own PID
 async function launch() {
   if (typeof WebSocket === 'undefined') throw new Error('Node 22+ is required (no built-in WebSocket in ' + process.version + ')');
-  const exe = findChrome();
-  if (!exe) throw new Error('No Chrome, Edge or Chromium found; set CHROME_PATH.');
   const dir = join(PROFILE, `run-${process.pid}-${Date.now().toString(36)}`);
-  mkdirSync(dir, { recursive: true });
-  const proc = spawn(exe, [
-    '--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run', '--no-default-browser-check',
-    '--mute-audio', '--hide-scrollbars', '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
-    '--disable-backgrounding-occluded-windows', '--disable-features=Translate,MediaRouter', '--force-color-profile=srgb',
-    '--autoplay-policy=no-user-gesture-required', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--disk-cache-size=16777216',
-    '--window-size=1440,900', 'about:blank',
-  ], { stdio: ['ignore', 'ignore', 'pipe'] });
-  const pid = proc.pid;
-  let stopped = false;
-  const stop = () => {
-    if (stopped) return; stopped = true;
-    if (pid && proc.exitCode === null) {
-      if (process.platform === 'win32') spawnSync('taskkill', ['/pid', String(pid), '/T', '/F'], { stdio: 'ignore' });
-      else { try { process.kill(pid, 'SIGKILL'); } catch {} }
-    }
-    try { rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); } catch {}
-  };
-  // the normal end: let Chrome exit after Browser.close (killed by its PID if it does not), then remove its profile
+  const { port, pid, kill, cleanup } = await launchBrowser({ tool: 'consistency', profile: dir, windowSize: '1440,900' });
+  const stop = kill;
+  // the normal end: let the engine exit (killed by its PID if it does not), then remove its profile
   // folder, trying for up to 10s while its helper processes let go of their files
-  const close = async () => {
-    if (stopped) return;
-    if (pid && proc.exitCode === null) await Promise.race([new Promise((r) => proc.once('exit', r)), sleep(5000)]);
-    if (pid && proc.exitCode === null) {
-      if (process.platform === 'win32') spawnSync('taskkill', ['/pid', String(pid), '/T', '/F'], { stdio: 'ignore' });
-      else { try { process.kill(pid, 'SIGKILL'); } catch {} }
-    }
-    stopped = true;
-    for (let i = 0; i < 40 && existsSync(dir); i++) { try { rmSync(dir, { recursive: true, force: true }); } catch {} if (existsSync(dir)) await sleep(250); }
-  };
+  const close = async () => { await cleanup(); };
   process.once('exit', stop);
   for (const s of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.once(s, () => { stop(); process.exit(130); });
-  const ws = await new Promise((res, rej) => {
-    let buf = '';
-    // a busy machine (several builders, WebGL on the CPU) can take long to start Chrome: wait 60s
-    const t = setTimeout(() => rej(new Error('Chrome did not start within 60s')), 60000);
-    proc.stderr.on('data', (d) => { buf += d; const m = buf.match(/DevTools listening on (ws:\/\/\S+)/); if (m) { clearTimeout(t); res(m[1]); } });
-    proc.once('exit', (c) => { clearTimeout(t); rej(new Error('Chrome exited early (' + c + ')')); });
-  }).catch((e) => { stop(); throw e; });
+  const ver = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
+  const ws = ver.webSocketDebuggerUrl;
   return { ws, pid, stop, close };
 }
 

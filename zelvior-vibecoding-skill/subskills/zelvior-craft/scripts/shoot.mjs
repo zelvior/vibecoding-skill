@@ -53,9 +53,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import zlib from 'node:zlib';
-import { spawn, execFileSync } from 'node:child_process';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
+import { requireChrome, launchBrowser } from './_legacy.mjs';
+
+requireChrome('shoot');
 
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf('--' + k); return i < 0 ? d : (args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : true); };
@@ -110,15 +112,6 @@ if (!/^https?:\/\//i.test(url)) {
     next();
   }).catch((e) => { console.error('shoot: ' + e.message); process.exit(1); });
   url = `http://127.0.0.1:${port}/${path.relative(root, file).split(path.sep).map(encodeURIComponent).join('/')}`;
-}
-
-function findChrome() {
-  const local = process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google/Chrome/Application/chrome.exe') : null;
-  const c = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', local,
-    'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'];
-  const f = c.find(p => p && fs.existsSync(p));
-  if (!f) throw new Error('no Chrome found (set CHROME_PATH)');
-  return f;
 }
 
 /* ---------------------------------------------------------------- PNG (8-bit RGB/RGBA, no interlace) */
@@ -313,22 +306,13 @@ async function tilesOf(page, outDir, o) {
   const v = report.views[view];
   return { view, ...v, line: `${view}: ${v.sections.length} sections, ${v.screens} screens, navH ${v.navH}, tiles ${v.sections.reduce((a, s) => a + s.tiles.length, 0)}; heights ${v.sections.map((s) => s.hScreens).join(' ')}` };
 }
-/* ---------------------------------------------------------------- Chrome */
+/* ---------------------------------------------------------------- browser engine (Obscura or Chrome) */
 const profile = inProject(profileArg, 'shoot');
-fs.mkdirSync(profile, { recursive: true });
-const portFile = path.join(profile, 'DevToolsActivePort');
-try { fs.rmSync(portFile); } catch { /* none */ }
-const child = spawn(findChrome(), ['--headless=new', `--user-data-dir=${profile}`, '--remote-debugging-port=0', '--no-first-run',
-  '--no-default-browser-check', '--disable-extensions', '--hide-scrollbars', '--mute-audio', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
-  `--window-size=${W},${VH}`, 'about:blank'], { stdio: 'ignore', windowsHide: true });
-const kill = () => { if (child.exitCode != null) return; try { execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); } catch { try { child.kill(); } catch { /* gone */ } } };
+const { port, kill, cleanup, engine } = await launchBrowser({ tool: 'shoot', profile, windowSize: `${W},${VH}` });
 const noTiles = !!opt('no-tiles'), tilesDir = opt('tiles', null);
 const guard = setTimeout(() => { console.error('shoot: timed out'); kill(); process.exit(2); }, noTiles ? 300000 : 480000); // screens wait for their pictures and effects: a long page needs the time
 
 try {
-  let port = null;
-  for (let i = 0; i < 150 && !port; i++) { await sleep(100); try { port = parseInt(fs.readFileSync(portFile, 'utf8'), 10) || null; } catch { /* not yet */ } }
-  if (!port) throw new Error('Chrome did not start');
   const ver = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
   const ws = new WebSocket(ver.webSocketDebuggerUrl);
   await new Promise((r, j) => { ws.addEventListener('open', r, { once: true }); ws.addEventListener('error', j, { once: true }); });
@@ -478,6 +462,6 @@ try {
 } finally {
   clearTimeout(guard);
   await sleep(400);
-  kill();
+  await cleanup();
   server?.close();
 }

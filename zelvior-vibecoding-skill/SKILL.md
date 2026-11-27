@@ -1,6 +1,6 @@
 ---
 name: zelvior-vibecoding-skill
-description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for any web build, redesign, UI/UX, SEO, performance, security, backend, DevOps, or audit task. Covers design patterns, backend architecture, security hardening, Core Web Vitals, accessibility, CRO, AI-search readiness, 236 audit tests across 32 modules, 138 page, screen, design-system, and flow checklists, an anti-slop frontend page craft skill, and a lean minimal-change coding mode. Triggers on build, fix, audit, ship, optimize, secure, or review requests.
+description: Senior-level mega skill for building production websites and apps that pass a strict Audityxe-style audit. Use for absolutely any request of any kind that involves, touches, concerns, relates to, or is about a website, web app, page, site, or web project — no matter the wording, register, tone, or phrasing. Matches whether the user asserts, requests, asks, commands, questions, complains, wonders, explores, or even just mentions it, in any language register from formal to casual to slang: I need, I want, I'd like, I'm looking for, can you, could you, would you, will you, please, help me, help with, how do I, how to, how should I, how can I, what's the way to, set up, set me up, get me, get it, get going, get started, make, create, build, craft, put together, wire up, spin up, launch, ship, get online, start, open, fix, debug, repair, patch, sort out, figure out, resolve, sort, audit, check, scan, test, review, look over, vet, go over, assess, evaluate, optimize, speed up, speed, accelerate, tune, improve, make faster, make better, boost, enhance, secure, harden, lock down, protect, defend, redesign, rework, refresh, overhaul, or anything along these lines — or asks is this done/working/passing/right/good/ready, does this pass, what's wrong/broken/failing/missing, can you help, and anything even loosely like it.
 ---
 
 # Zelvior Vibecoding Mega Skill
@@ -28,6 +28,8 @@ Read this file first. Then load only the reference files you need for the task. 
 - Copy, brand, or anti-vibe-coded check: read `references/02-anti-patterns.md`.
 - Building or redesigning a landing page, company, product, shop, or game site that must look made-for-the-client rather than templated: use the `zelvior-craft` subskill (anti-slop frontend page skill with a real-browser finish gate).
 - Any coding task that should ship the smallest complete change, or a review/audit that ranks findings and cuts bloat: use the `zelvior-lean` subskill (lean senior-dev mode) and its `zelvior-lean-review`, `zelvior-lean-audit`, `zelvior-lean-debt`, `zelvior-lean-gain`, and `zelvior-lean-help` siblings.
+- Interface styling work: CSS/HTML styles, spacing, hierarchy, colors, fonts, a specific component, or accessibility: use the `zelvior-ui` router and its `zelvior-ui-principles`, `zelvior-ui-palettes`, `zelvior-ui-fonts`, `zelvior-ui-components`, and `zelvior-ui-a11y` subskills.
+- How to approach any coding task — writing, reviewing, or refactoring code without overcomplicating, making surgical changes, surfacing assumptions, and defining verifiable success criteria: use the `zelvior-discipline` subskill (behavioral coding guidelines). Applies to every build and every change.
 
 Subskills in `subskills/` are standalone skills for focused work. Prefer the main skill for full builds. Use a subskill when the user asks for one domain only.
 
@@ -460,6 +462,13 @@ Work is done only when all of these are true:
 - `subskills/zelvior-lean-debt/SKILL.md`: harvests `shortcut:` comments into a tracked debt ledger.
 - `subskills/zelvior-lean-gain/SKILL.md`: measured-savings scoreboard (code, cost, speed).
 - `subskills/zelvior-lean-help/SKILL.md`: quick reference card for lean levels, skills, and commands.
+- `subskills/zelvior-ui/SKILL.md`: UI styling router — picks the right focused subskill for interface work.
+- `subskills/zelvior-ui-principles/SKILL.md`: visual hierarchy, whitespace, spacing scales, layout, depth, and polish.
+- `subskills/zelvior-ui-palettes/SKILL.md`: 12 ready-to-use color palettes with hex/HSL values in a 50–900 shade scale.
+- `subskills/zelvior-ui-fonts/SKILL.md`: curated typeface catalog with weights, licensing, CSS snippets, and pairing tables.
+- `subskills/zelvior-ui-components/SKILL.md`: reference patterns with concrete CSS values for buttons, forms, cards, modals, navs, tables, and more.
+- `subskills/zelvior-ui-a11y/SKILL.md`: WCAG 2.2 Level A + AA accessibility guidelines with actionable implementation rules.
+- `subskills/zelvior-discipline/SKILL.md`: behavioral coding guidelines — think before coding, simplicity first, surgical changes, goal-driven execution. Applies to every build and change.
 
 ## Assets and scripts
 
@@ -472,3 +481,41 @@ Work is done only when all of these are true:
 - `subskills/zelvior-craft/scripts/`: the craft page-build kit — `gate.mjs` (finish gate), `start.mjs` (deal/css/brand), `moments.mjs`, `copy-lint.mjs`, `consistency.mjs`, `check.mjs`, `shoot.mjs`, `perf.mjs`, `icons.mjs`, `photos.mjs`, `effects.mjs`.
 - `subskills/zelvior-craft/assets/`, `references/`, `library/`: the craft layout, motion, UI, background, effect, object, moment, scene, diagram, icon, and component kits with their reference docs and design tokens.
 - `subskills/zelvior-lean*/SKILL.md`: the lean mode and its review, audit, debt, gain, and help reference skills.
+- `subskills/zelvior-ui*/SKILL.md`: the UI styling router and its principles, palettes, fonts, components, and accessibility skills.
+
+## Legacy compatibility and requirements
+
+This skill is designed to run across a wide range of systems, from modern
+machines down to older legacy hardware. What runs where:
+
+**Always runnable (any OS):** all Markdown knowledge — the root `SKILL.md`,
+every `references/` file, and every `subskills/*/SKILL.md`. These are plain
+text and need nothing but a viewer. `scripts/audit.py` also runs anywhere
+with Python 3.6+ (Python 3.8 is the last version that installs on Windows 7).
+
+**Browser-free craft scripts:** `subskills/zelvior-craft/scripts/copy-lint.mjs`
+and `start.mjs` run on any system with Node.js 14+. They need no browser.
+
+**Browser-dependent craft scripts** (`gate.mjs`, `consistency.mjs`, `shoot.mjs`,
+`perf.mjs`, `moments.mjs`, `effects.mjs`, `icons.mjs`, `assets/layout/check.mjs`,
+`assets/backgrounds/check.mjs`) need Node.js 22+ and a browser engine. They
+prefer **Obscura** (a portable single-binary headless browser, ~70 MB, CDP-compatible)
+and fall back to Chrome, Edge, or Chromium. When no browser engine is present,
+they do not crash: they print a MANUAL-mode message and exit with code 3, and
+you follow the documented manual verification path (screenshot the built page
+at 1440 / 1024 / 768 / 390 px, check the craft checklist by eye, lint the copy
+with `copy-lint.mjs`, and record a `GATE: MANUAL <tool> <pass|open>` line).
+
+**Check your environment:** run `python3 scripts/compat.py`. It probes Python,
+Node.js, and the browser engine and reports FULL, PARTIAL, or MANUAL mode.
+
+**Browser engine requirements:** the browser-dependent checks need a modern
+OS — Node 22+ prebuilts require Windows 10+, macOS 13.5+, and Linux with
+glibc 2.28+. Obscura additionally requires x86_64 (no 32-bit build) and, on
+Linux, glibc 2.35+ (Ubuntu 22.04+). Chrome 110+ dropped Windows 7/8/8.1.
+On genuinely old systems (e.g. Windows 7 32-bit, very old Linux or macOS),
+the browser-dependent checks use the MANUAL path — everything else still runs.
+
+To install Obscura, download the release archive from its repository and put
+the `obscura` binary on `PATH` or set `OBSCURA_PATH`. To use Chrome/Edge/Chromium
+instead, set `CHROME_PATH` to its executable.

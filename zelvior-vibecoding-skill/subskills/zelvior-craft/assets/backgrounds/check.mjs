@@ -17,7 +17,10 @@ import os from 'node:os';
 import zlib from 'node:zlib';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
-import { spawn, execFileSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
+import { requireChrome, launchBrowser } from '../../scripts/_legacy.mjs';
+
+requireChrome('backgrounds-check');
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SKILL = path.resolve(HERE, '..', '..');
@@ -72,13 +75,9 @@ const lin = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.
 const lum = (r, g, b) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
 const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 
-/* ---------------------------------------------------------------- Chrome */
-const findChrome = () => ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', process.env.CHROME_PATH, '/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p => p && fs.existsSync(p));
-const prof = path.resolve(profile); fs.mkdirSync(prof, { recursive: true });
-const portFile = path.join(prof, 'DevToolsActivePort'); try { fs.rmSync(portFile); } catch { /* none */ }
-const child = spawn(findChrome(), ['--headless=new', `--user-data-dir=${prof}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check',
-  '--disable-extensions', '--hide-scrollbars', '--mute-audio', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--window-size=800,900', 'about:blank'], { stdio: 'ignore', windowsHide: true });
-const kill = () => { if (child.exitCode != null) return; try { execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); } catch { try { child.kill(); } catch { /* gone */ } } };
+/* ---------------------------------------------------------------- browser engine (Obscura or Chrome) */
+const prof = path.resolve(profile);
+const { port, kill, cleanup } = await launchBrowser({ tool: 'backgrounds-check', profile: prof, windowSize: '800,900' });
 // the page is served over http on 127.0.0.1 (5965-5969, --port), never opened from file://
 const PORT = +opt('port', 5967);
 if (PORT < 5965 || PORT > 5969) { console.error('check: --port must be 5965-5969'); process.exit(1); }
@@ -94,9 +93,6 @@ const guard = setTimeout(() => { console.error('check: timed out'); kill(); proc
 
 const results = [];
 try {
-  let port = null;
-  for (let i = 0; i < 150 && !port; i++) { await sleep(100); try { port = parseInt(fs.readFileSync(portFile, 'utf8'), 10) || null; } catch { /* not yet */ } }
-  if (!port) throw new Error('Chrome did not start');
   const ver = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
   const ws = new WebSocket(ver.webSocketDebuggerUrl);
   await new Promise((r, j) => { ws.addEventListener('open', r, { once: true }); ws.addEventListener('error', j, { once: true }); });
@@ -163,7 +159,7 @@ try {
 } catch (e) {
   console.error('check:', e.message); process.exitCode = 1;
 } finally {
-  clearTimeout(guard); await sleep(300); kill(); srv.close();
+  clearTimeout(guard); await sleep(300); await cleanup(); srv.close();
 }
 
 /* ---------------------------------------------------------------- report */

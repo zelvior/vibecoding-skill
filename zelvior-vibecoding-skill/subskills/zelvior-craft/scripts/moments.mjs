@@ -55,8 +55,8 @@ import path from 'node:path';
 import os from 'node:os';
 import http from 'node:http';
 import crypto from 'node:crypto';
-import { spawn, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { requireChrome, launchBrowser } from './_legacy.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = path.join(ROOT, 'assets', 'moments');
@@ -314,12 +314,6 @@ function cmdGallery() {
 }
 
 /* ------------------------------------------------------------------ shoot */
-function findChrome() {
-  const c = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome', '/usr/bin/chromium'];
-  const f = c.find(p => p && fs.existsSync(p));
-  if (!f) throw new Error('no Chrome found (set CHROME_PATH)');
-  return f;
-}
 // a profile stays in the OS temp folder or the project: a relative --profile that leads out of this folder (or the folder
 // itself) goes to .zelvior-craft/chrome-<name>
 const inProject = (p, name) => {
@@ -331,6 +325,7 @@ const inProject = (p, name) => {
   return to;
 };
 async function cmdShoot(a) {
+  requireChrome('moments');
   const out = a.out && a.out !== true ? path.resolve(a.out) : die('shoot: pass --out <dir>');
   // default Chrome profile folder: --profile, else $ZELVIOR_CRAFT_TMP/chrome/<tool>-<pid>, else a fresh folder under the system temp dir
   const defaultProfile = () => process.env.ZELVIOR_CRAFT_TMP ? path.join(process.env.ZELVIOR_CRAFT_TMP, 'chrome', 'moments-' + process.pid) : path.join(os.tmpdir(), 'zelvior-craft-moments-' + process.pid);
@@ -344,21 +339,12 @@ async function cmdShoot(a) {
   if (a.url && a.url !== true) { const rel = String(a.url).replace(/^\/+/, ''); moments = [{ id: path.basename(rel, '.html'), demo: rel, states: { start: { see: true, wait: 400 }, middle: { see: true, wait: 400 }, end: { see: true, wait: 900 } } }]; }
   if (!moments.length) die('shoot: no moment matches --only');
   fs.mkdirSync(out, { recursive: true });
-  fs.mkdirSync(profile, { recursive: true });
   const srv = await server(port);
-  const portFile = path.join(profile, 'DevToolsActivePort');
-  try { fs.rmSync(portFile); } catch { /* none */ }
   const W0 = widths[0], H0 = W0 < 600 ? 844 : 900;
-  const child = spawn(findChrome(), ['--headless=new', `--user-data-dir=${profile}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check',
-    '--disable-extensions', '--hide-scrollbars', '--mute-audio', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
-    `--window-size=${W0},${H0}`, 'about:blank'], { stdio: 'ignore', windowsHide: true });
-  const kill = () => { if (child.exitCode != null) return; try { execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); } catch { try { child.kill(); } catch { /* gone */ } } };
+  const { port: dport, kill, cleanup } = await launchBrowser({ tool: 'moments', profile, windowSize: `${W0},${H0}` });
   const guard = setTimeout(() => { console.error('shoot: timed out'); kill(); process.exit(2); }, 20 * 60 * 1000);
   const report = [];
   try {
-    let dport = null;
-    for (let i = 0; i < 150 && !dport; i++) { await sleep(100); try { dport = parseInt(fs.readFileSync(portFile, 'utf8'), 10) || null; } catch { /* not yet */ } }
-    if (!dport) throw new Error('Chrome did not start');
     const ver = await (await fetch(`http://127.0.0.1:${dport}/json/version`)).json();
     const ws = new WebSocket(ver.webSocketDebuggerUrl);
     await new Promise((r, j) => { ws.addEventListener('open', r, { once: true }); ws.addEventListener('error', j, { once: true }); });
@@ -443,7 +429,7 @@ async function cmdShoot(a) {
   } finally {
     clearTimeout(guard);
     await sleep(300);
-    kill();
+    await cleanup();
     srv.close();
   }
   // contact sheet
