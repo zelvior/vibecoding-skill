@@ -19,9 +19,19 @@ Zelvior Vibecoding Mega Skill is a description-driven routing system for AI codi
 ## Quick start
 
 ```bash
+# Install into your agent via skills.sh
+npx skills add zelvior/vibecoding-skill
+
 python3 zelvior-vibecoding-skill/scripts/compat.py            # check environment
 python3 zelvior-vibecoding-skill/scripts/audit.py https://example.com
 ```
+
+## Distribution
+
+- skills.sh: https://skills.sh/zelvior/vibecoding-skill (install with `npx skills add zelvior/vibecoding-skill`)
+- SkillUse: https://skilluse.dev/ (registry for Claude Code, Cursor, Windsurf)
+- Get Claude Skills: https://www.getclaudeskills.com/ (indexes public GitHub SKILL.md repos)
+- Community collections: https://github.com/hoodini/ai-agents-skills
 
 ## Zelvior Labs links
 
