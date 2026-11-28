@@ -1,0 +1,56 @@
+# Zelvior Vibecoding Mega Skill
+
+> Made by **Zelvior Labs**. A senior-level mega skill for building production websites and apps that pass a strict, opinionated audit. It routes any web or coding task to the right design, backend, security, SEO, performance, accessibility, and audit knowledge, then verifies the result against a 236-test audit.
+
+## Summary
+
+Zelvior Vibecoding Mega Skill is a description-driven routing system for AI coding agents that read `SKILL.md` files. Instead of dumping all knowledge at once, the agent loads only the reference guides and subskills relevant to the task. It bundles 12 deep-dive guides, 138 page/screen/design-system/flow checklists, a 236-test audit across 32 modules, an anti-slop frontend craft skill, a lean minimal-change coding mode, a UI styling knowledge set, and behavioral coding guidelines.
+
+## What it provides
+
+- **Mega skill** (`zelvior-vibecoding-skill/SKILL.md`): the routing entry point and the design must-haves / banned patterns, backend, security, SEO, performance, accessibility, CRO, DevOps, and definition-of-done knowledge.
+- **12 reference guides** (`zelvior-vibecoding-skill/references/`): design system, anti-patterns, backend, frontend/data, SEO, security, performance, accessibility/mobile, CRO, DevOps/SRE, audit, AI search.
+- **138 checklists** (`references/13`–`17`): website page types, web-app screens, design-system foundations, mobile screens, and user flows — every item is a required test.
+- **236-test audit**: a local `scripts/audit.py` checker plus a full manual checklist across 32 modules.
+- **21 subskills** (`subskills/`): core knowledge skills, the `zelvior-craft` anti-slop frontend skill, the `zelvior-lean` minimal-change family, the `zelvior-ui` styling router, and `zelvior-discipline` behavioral guidelines.
+- **Scripts**: `scripts/audit.py` (stdlib-only, Python 3.6+) and `scripts/compat.py` (environment probe → FULL / PARTIAL / MANUAL).
+- **Assets**: `robots.txt`, `llms.txt`, `security.txt`, `sitemap.xml`, `404.html`.
+
+## Quick start
+
+```bash
+# Install into your agent via skills.sh
+npx skills add zelvior/vibecoding-skill
+
+python3 zelvior-vibecoding-skill/scripts/compat.py            # check environment
+python3 zelvior-vibecoding-skill/scripts/audit.py https://example.com
+```
+
+## Distribution
+
+- skills.sh: https://skills.sh/zelvior/vibecoding-skill (install with `npx skills add zelvior/vibecoding-skill`)
+- SkillUse: https://skilluse.dev/ (registry for Claude Code, Cursor, Windsurf)
+- Get Claude Skills: https://www.getclaudeskills.com/ (indexes public GitHub SKILL.md repos)
+- Community collections: https://github.com/hoodini/ai-agents-skills
+
+## Zelvior Labs links
+
+- npm: https://www.npmjs.com/~zelnpm
+- ORCID: https://orcid.org/0009-0009-2376-367X
+- YouTube: https://youtube.com/@zelviorhere
+- Linktree: https://linktr.ee/zelvior
+- Discord: https://discord.gg/UQfzQzymc
+- Donate: https://nowpayments.io/donation/zelviorhere
+- X / Twitter: https://x.com/zelviorhere
+- Website: https://zelviorlabs.vercel.app
+- Blog: https://zelvior.blogspot.com
+- GitHub organization: https://github.com/Zelvior-Labs
+- GitHub user: https://github.com/zelvior
+
+## Key links
+
+- [README](README.md): overview, full contents, and quick start.
+- [Getting started](docs/getting-started.md): end-to-end workflow.
+- [Architecture](docs/architecture.md): how the routing system works.
+- [Legacy compatibility](docs/legacy-compatibility.md): OS support and the MANUAL fallback.
+- [License](LICENSE): GPL-3.0.
