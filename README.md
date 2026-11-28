@@ -50,6 +50,11 @@ Find Zelvior Labs and support the project across the web:
 <!-- Add more badges below, one per line. Format: [![Name](badge-image-url)](link-url) -->
 [![RepoRanker](https://reporanker.com/badge/zelvior/vibecoding-skill)](https://reporanker.com/repos/zelvior/vibecoding-skill)
 [![skills.sh](https://skills.sh/b/zelvior/vibecoding-skill)](https://skills.sh/zelvior/vibecoding-skill)
+[![skills.sh](https://skills.sh)](https://skills.sh)
+
+**Agent support:**
+
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-D97757?style=flat)](https://docs.anthropic.com/en/docs/claude-code) [![Cursor](https://img.shields.io/badge/Cursor-supported-1A1B26?style=flat)](https://cursor.com) [![Codex](https://img.shields.io/badge/Codex-supported-10A37F?style=flat)](https://developers.openai.com/codex/) [![Windsurf](https://img.shields.io/badge/Windsurf-supported-FF9E00?style=flat)](https://windsurf.com) [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-supported-1F2328?style=flat)](https://github.com/features/copilot) [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-supported-6366F1?style=flat)](https://skills.sh)
 
 ## Table of contents
 
@@ -233,7 +238,14 @@ skilluse install zelvior-vibecoding-skill
 
 **Get Claude Skills** — an 8,000+ skill directory that crawls public GitHub repos and indexes valid `SKILL.md` files automatically. The skill is submitted for indexing at [getclaudeskills.com](https://www.getclaudeskills.com/) and can be browsed at [getclaudeskills.com/skills](https://www.getclaudeskills.com/skills).
 
-**Community collections** — the skill is also contributed to community-curated skill aggregator repos on GitHub, such as [hoodini/ai-agents-skills](https://github.com/hoodini/ai-agents-skills), which serves Claude Code, GitHub Copilot, Cursor, and Windsurf users.
+**Community collections** — the skill is also submitted to community-curated awesome lists on GitHub:
+
+- [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills)
+- [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills)
+- [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills)
+- [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills)
+- [karanb192/awesome-claude-skills](https://github.com/karanb192/awesome-claude-skills)
+- [hoodini/ai-agents-skills](https://github.com/hoodini/ai-agents-skills), which serves Claude Code, GitHub Copilot, Cursor, and Windsurf users.
 
 ## Legacy compatibility
 
