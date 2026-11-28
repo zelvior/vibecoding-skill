@@ -49,6 +49,7 @@ Find Zelvior Labs and support the project across the web:
 
 <!-- Add more badges below, one per line. Format: [![Name](badge-image-url)](link-url) -->
 [![RepoRanker](https://reporanker.com/badge/zelvior/vibecoding-skill)](https://reporanker.com/repos/zelvior/vibecoding-skill)
+[![skills.sh](https://skills.sh/b/zelvior/vibecoding-skill)](https://skills.sh/zelvior/vibecoding-skill)
 
 ## Table of contents
 
@@ -57,6 +58,7 @@ Find Zelvior Labs and support the project across the web:
 - [What is inside](#what-is-inside)
 - [Connect with Zelvior Labs](#connect-with-zelvior-labs)
 - [Quick start](#quick-start)
+- [Install & distribution](#install--distribution)
 - [Legacy compatibility](#legacy-compatibility)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
@@ -208,6 +210,30 @@ python3 zelvior-vibecoding-skill/scripts/audit.py ./dist/index.html
 ```
 
 Read `zelvior-vibecoding-skill/SKILL.md` first, then load only the reference files and subskills you need for the task. See `docs/getting-started.md` for the full workflow.
+
+## Install & distribution
+
+The skill is published to every major agent-skills channel. Install it with any of these:
+
+**skills.sh** — install directly from this GitHub repo into your agent:
+
+```bash
+npx skills add zelvior/vibecoding-skill
+```
+
+The install-count badge is in the [Badges](#badges) section above, and the leaderboard lives at [skills.sh/zelvior/vibecoding-skill](https://skills.sh/zelvior/vibecoding-skill).
+
+**SkillUse** — a GitHub-based registry for Claude Code, Cursor, and Windsurf:
+
+```bash
+npm install -g skilluse
+skilluse repo add zelvior/vibecoding-skill
+skilluse install zelvior-vibecoding-skill
+```
+
+**Get Claude Skills** — an 8,000+ skill directory that crawls public GitHub repos and indexes valid `SKILL.md` files automatically. The skill is submitted for indexing at [getclaudeskills.com](https://www.getclaudeskills.com/) and can be browsed at [getclaudeskills.com/skills](https://www.getclaudeskills.com/skills).
+
+**Community collections** — the skill is also contributed to community-curated skill aggregator repos on GitHub, such as [hoodini/ai-agents-skills](https://github.com/hoodini/ai-agents-skills), which serves Claude Code, GitHub Copilot, Cursor, and Windsurf users.
 
 ## Legacy compatibility
 
